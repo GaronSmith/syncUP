@@ -1,6 +1,6 @@
 const SET_USER = 'session/setUser';
 
-const setUser = (user) => {
+export const setUser = (user) => {
     return {
         type: SET_USER,
         payload: user
