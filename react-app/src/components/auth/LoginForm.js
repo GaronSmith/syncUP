@@ -16,7 +16,6 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     const user = await login(email, password);
     if (!user.errors) {
       setAuthenticated(true);
-      print(user)
       dispatch(setUser(user))
     } else {
       setErrors(user.errors);
