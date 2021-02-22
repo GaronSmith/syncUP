@@ -8,7 +8,7 @@ export const setUser = (user) => {
 }
 
 
-const initialState = {user: null};
+const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
 
@@ -18,6 +18,8 @@ const sessionReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.user = action.payload
             return newState
+        default:
+            return state
     }
 }
 
