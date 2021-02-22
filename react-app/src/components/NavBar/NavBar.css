@@ -1,3 +1,27 @@
 .navbar__container{
-    
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+    border: 5px solid #77A6F7;
+    border-radius: 10px;
+    background-color: #77A6F7;
+}
+
+.navbar__container-left{
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
+
+.navbar__container-right{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    width: 11rem;
+    margin-right: 1rem;
+}
+
+.navbar__link{
+    text-decoration: none;
+    color: #F3F7FE;
+    font-size: large;
 }

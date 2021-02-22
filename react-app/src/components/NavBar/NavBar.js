@@ -13,12 +13,20 @@ const NavBar = ({ setAuthenticated, authenticated }) => {
             </NavLink>
           </div>
            <div className= 'navbar__container-right'>
-            {!authenticated && <> <NavLink className='navbar__link' to="/login" exact={true} activeClassName="active">
-              Login
-            </NavLink>
-            <NavLink className='navbar__link' to="/sign-up" exact={true} activeClassName="active">
-              Sign Up
-            </NavLink></>}
+            {!authenticated && <> 
+              <div className='navbar_link_container'>
+                <NavLink className='navbar__link' to="/login" exact={true} activeClassName="active">
+                  Login
+                </NavLink>
+              </div>
+              
+            <div className='navbar_link_container'>
+                <NavLink className='navbar__link' to="/sign-up" exact={true} activeClassName="active">
+                  Sign Up
+                </NavLink>
+              </div> 
+          </>
+            }
 
           {authenticated && <LogoutButton setAuthenticated={setAuthenticated} />}
           </div>
