@@ -10,9 +10,7 @@ import configureStore from "./store";
 const store = configureStore();
 
 if (process.env.NODE_ENV !== "production") {
-  restoreCSRF();
 
-  window.csrfFetch = fetch;
   window.store = store;
   window.sessionActions = sessionActions;
 }
