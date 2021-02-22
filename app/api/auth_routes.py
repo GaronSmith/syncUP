@@ -1,10 +1,11 @@
 from flask import Blueprint, jsonify, session, request
-from werkzeug.security import secure_filename
+from werkzeug.utils import secure_filename
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 from ..helpers import s3, upload_file_to_s3
+from ..config import S3_BUCKET
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -62,22 +63,33 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
+    print("HITTING BACKEND")
+    data = request.form['imageFile']
+    print("DATA", data)
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    # S3 Logic
-    if "user_file" not in request.files:
-        return "No user_file key in request.files"
+    print(request.files)
+    # S3
+    if "imageFile" not in request.files:
+        return "No imageFile key in request.files"
 
-    file = request.files["user_file"]
+    # S3
+    file = request.files["imageFile"]
 
+    # S3
     if file.filename == "":
         return "Please select a file"
 
+    # S3
+    output = ''
+
+    # S3
     if file and allowed_file(file.filename):
         file.filename = secure_filename(file.filename)
-        output = upload_file_to_s3(file, app.config["S3_BUCKET"])
+        output = upload_file_to_s3(file, S3_BUCKET)
 
+    print("OUTPUT", output)
 
     if form.validate_on_submit():
         user = User(

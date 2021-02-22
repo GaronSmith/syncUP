@@ -31,17 +31,34 @@ export const logout = async () => {
 };
 
 
-export const signUp = async (username, email, password) => {
+export const signUp = async (username, email, imageFile, password) => {
+
+  const formData = new FormData();
+  formData.append("username", username);
+  formData.append("email", email);
+  formData.append("password", password);
+
+  if(imageFile) formData.append("imageFile", imageFile);
+
+  // console.log(imageFile)
+  // for (let pair of formData.entries()) {
+  //   console.log(pair[0]+ ', ' + pair[1]);
+  // }
+
   const response = await fetch("/api/auth/signup", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
     },
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
+    body: formData,
   });
-  return await response.json();
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  } else {
+    console.log("ERROR")
+    console.log(response)
+    return {errors: "Server Error"}
+  }
 }

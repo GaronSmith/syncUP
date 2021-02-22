@@ -5,13 +5,15 @@ import { signUp } from '../../services/auth';
 const SignUpForm = ({authenticated, setAuthenticated}) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const onSignUp = async (e) => {
     e.preventDefault();
+
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
+      const user = await signUp(username, email, imageFile, password);
       if (!user.errors) {
         setAuthenticated(true);
       }
@@ -24,6 +26,10 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  const updateImageFile = (e) => {
+    setImageFile(e.target.files[0]);
   };
 
   const updatePassword = (e) => {
@@ -56,6 +62,14 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
           name="email"
           onChange={updateEmail}
           value={email}
+        ></input>
+      </div>
+      <div>
+        <label>Picture</label>
+        <input
+          type="file"
+          name="imageFile"
+          onChange={updateImageFile}
         ></input>
       </div>
       <div>
