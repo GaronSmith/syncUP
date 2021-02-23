@@ -4,8 +4,7 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
-from ..helpers import s3, upload_file_to_s3
-from ..config import S3_BUCKET
+from ..helpers import s3, upload_file_to_s3, allowed_file
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -63,47 +62,28 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
-    print("HITTING BACKEND")
-
-    # for k in request:
-    #     print(k, request.form[k])
-    # data = request.form.to_dict()
-    print("DATA", request.data)
-
     form = SignUpForm()
-    # for k in form:
-    #     print(k)
     form['csrf_token'].data = request.cookies['csrf_token']
-
-    print(request.files.to_dict())
-    # S3
-    if "imageFile" not in request.files:
-        print("HITTING THIS?")
-        return { "errors": "No imageFile key in request.files" }
-
-    # S3
-    file = request.files["imageFile"]
-
-    # S3
-    if file.filename == "":
-        return "Please select a file"
-
-    # S3
-    output = ''
-
-    # S3
-    if file and allowed_file(file.filename):
-        file.filename = secure_filename(file.filename)
-        output = upload_file_to_s3(file, S3_BUCKET)
-
-    print("OUTPUT", output)
-
+    print("BACKEND")
     if form.validate_on_submit():
+
         user = User(
             username=form.data['username'],
             email=form.data['email'],
+            image_url=None,
             password=form.data['password']
         )
+
+        filename = f"user-pic-{user.email}.jpg"
+
+        print("FILE", request.files["imageFile"])
+
+        url = upload_file_to_s3(request.files['imageFile'], filename)
+
+        print("URL", url)
+
+        user.image_url = url
+
         db.session.add(user)
         db.session.commit()
         login_user(user)

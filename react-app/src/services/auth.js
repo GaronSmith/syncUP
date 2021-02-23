@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const authenticate = async() => {
   const response = await fetch('/api/auth/',{
     headers: {
@@ -39,26 +41,11 @@ export const signUp = async (username, email, imageFile, password) => {
   formData.append("password", password);
   if(imageFile) formData.append("imageFile", imageFile);
 
-  // console.log(imageFile)
-  // for (let pair of formData.entries()) {
-  //   console.log(pair[0]+ ', ' + pair[1]);
-  // }
-
-  const response = await fetch("/api/auth/signup", {
-    method: "POST",
+  const response = await axios.post("/api/auth/signup", formData, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      "content-type": "multipart/form-data",
     },
-    body: JSON.stringify(formData),
-    // body: formData,
   });
 
-  if (response.ok) {
-    const data = await response.json();
-    return data;
-  } else {
-    console.log("ERROR")
-    console.log(response)
-    return {errors: "Server Error"}
-  }
+  return response.data;
 }
