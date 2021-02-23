@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 
 import configureStore from "./store";
+import { ModalProvider } from './context/modal';
 
 const store = configureStore();
 
@@ -17,11 +18,11 @@ if (process.env.NODE_ENV !== "production") {
 function Root() {
   return (
     <Provider store = {store}>
-      <React.StrictMode>
+      <ModalProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </React.StrictMode>
+      </ModalProvider>
     </Provider>
   )
 }
