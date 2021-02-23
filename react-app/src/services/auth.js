@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const authenticate = async() => {
   const response = await fetch('/api/auth/',{
     headers: {
@@ -31,17 +33,21 @@ export const logout = async () => {
 };
 
 
-export const signUp = async (username, email, password) => {
-  const response = await fetch("/api/auth/signup", {
-    method: "POST",
+export const signUp = async (firstName, lastName, email, password, imageFile, location) => {
+
+  const formData = new FormData();
+  formData.append("first_name", firstName);
+  formData.append("last_name", lastName);
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("location", location);
+  if(imageFile) formData.append("imageFile", imageFile);
+
+  const response = await axios.post("/api/auth/signup", formData, {
     headers: {
-      "Content-Type": "application/json",
+      "content-type": "multipart/form-data",
     },
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
   });
-  return await response.json();
+
+  return response.data;
 }
