@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal } from '../../../context/modal'
 import LoginForm from './LoginForm'
 
-function LoginFormModal() {
+function LoginFormModal({setAuthenticated, authenticated}) {
     const [showModal, setShowModal] = useState(false)
 
     return (
@@ -12,7 +12,7 @@ function LoginFormModal() {
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <LoginForm />
+                    <LoginForm setAuthenticated={setAuthenticated} authenticated={authenticated}/>
                 </Modal>
             )}
         </>
