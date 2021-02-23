@@ -15,7 +15,8 @@ def seed_events():
         details='An event worthy of a demonstration, part 2', owner_id=owner.id,
         group_id=group.id, date=date.today(), capacity=25)
 
-    db.session.add(demo, demo2)
+    db.session.add(demo)
+    db.session.add(demo2)
 
     db.session.commit()
 
