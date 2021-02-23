@@ -1,0 +1,33 @@
+.login__container{
+    background-color: rgba(119, 166, 247, .9);
+    height: 17rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items:center ;
+}
+
+.form__title{
+    color: #F3F7FE;
+}
+.form_field-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between; 
+}
+
+.form__field{
+    margin-top: 1rem;
+}
+
+.form__field-label{
+    margin-right: .7rem;
+}
+#form__email{
+    margin-left:1.45rem;
+}
+
+.form__button{
+    margin-left: 4.6rem;
+    margin-top: 3rem;
+}
