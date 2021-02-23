@@ -3,7 +3,7 @@ const SET_EVENTS = 'events/setEvents'
 const setEvents = (events) => {
     return {
         type: SET_EVENTS,
-        payload: 
+        payload: events
     }
 }
 
