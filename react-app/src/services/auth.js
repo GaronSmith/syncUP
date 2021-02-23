@@ -37,7 +37,6 @@ export const signUp = async (username, email, imageFile, password) => {
   formData.append("username", username);
   formData.append("email", email);
   formData.append("password", password);
-
   if(imageFile) formData.append("imageFile", imageFile);
 
   // console.log(imageFile)
@@ -50,7 +49,8 @@ export const signUp = async (username, email, imageFile, password) => {
     headers: {
       "Content-Type": "multipart/form-data",
     },
-    body: formData,
+    body: JSON.stringify(formData),
+    // body: formData,
   });
 
   if (response.ok) {

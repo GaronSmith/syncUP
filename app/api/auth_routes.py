@@ -64,15 +64,22 @@ def sign_up():
     Creates a new user and logs them in
     """
     print("HITTING BACKEND")
-    data = request.form['imageFile']
-    print("DATA", data)
+
+    # for k in request:
+    #     print(k, request.form[k])
+    # data = request.form.to_dict()
+    print("DATA", request.data)
+
     form = SignUpForm()
+    # for k in form:
+    #     print(k)
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print(request.files)
+    print(request.files.to_dict())
     # S3
     if "imageFile" not in request.files:
-        return "No imageFile key in request.files"
+        print("HITTING THIS?")
+        return { "errors": "No imageFile key in request.files" }
 
     # S3
     file = request.files["imageFile"]
