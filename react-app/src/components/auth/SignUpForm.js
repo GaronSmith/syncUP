@@ -1,43 +1,60 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Redirect } from 'react-router-dom';
+import { setUser } from "../../store/session"
 import { signUp } from '../../services/auth';
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
-  const [username, setUsername] = useState("");
+  const dispatch = useDispatch();
+  const [errors, setErrors] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [imageFile, setImageFile] = useState(null);
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [location, setLocation] = useState("");
 
   const onSignUp = async (e) => {
     e.preventDefault();
 
     if (password === repeatPassword) {
-      const user = await signUp(username, email, imageFile, password);
+      const user = await signUp(firstName, lastName, email, password, imageFile, location);
       if (!user.errors) {
         setAuthenticated(true);
+        dispatch(setUser(user));
+      } else {
+        setErrors(user.errors);
       }
     }
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
 
+    const updatePassword = (e) => {
+      setPassword(e.target.value);
+    };
+
+    const updateRepeatPassword = (e) => {
+      setRepeatPassword(e.target.value);
+    };
+
   const updateImageFile = (e) => {
     setImageFile(e.target.files[0]);
   };
 
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
+  const updateLocation = (e) => {
+    setLocation(e.target.value);
   };
 
   if (authenticated) {
@@ -47,12 +64,26 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   return (
     <form onSubmit={onSignUp}>
       <div>
-        <label>User Name</label>
+        {errors.map((error) => (
+          <div>{error}</div>
+        ))}
+      </div>
+      <div>
+        <label>First Name</label>
         <input
           type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
+          name="firstName"
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          onChange={updateLastName}
+          value={lastName}
         ></input>
       </div>
       <div>
@@ -62,6 +93,15 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
           name="email"
           onChange={updateEmail}
           value={email}
+        ></input>
+      </div>
+      <div>
+        <label>Location</label>
+        <input
+          type="text"
+          name="location"
+          onChange={updateLocation}
+          value={location}
         ></input>
       </div>
       <div>

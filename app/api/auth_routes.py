@@ -64,29 +64,24 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("BACKEND")
+
+    url = upload_file_to_s3(request.files['imageFile'])
+
     if form.validate_on_submit():
 
         user = User(
-            username=form.data['username'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             email=form.data['email'],
-            image_url=None,
-            password=form.data['password']
+            password=form.data['password'],
+            image_url=url,
+            location=form.data['location'],
         )
-
-        filename = f"user-pic-{user.email}.jpg"
-
-        print("FILE", request.files["imageFile"])
-
-        url = upload_file_to_s3(request.files['imageFile'], filename)
-
-        print("URL", url)
-
-        user.image_url = url
 
         db.session.add(user)
         db.session.commit()
         login_user(user)
+
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
