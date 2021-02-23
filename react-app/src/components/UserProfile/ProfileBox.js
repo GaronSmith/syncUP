@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 
-function ProfileBox({content}) {
+function userFileButton() {
+  return (
+  <>
+    <span> </span>
+    <input type='file'/>
+  </>
+  )
+}
+
+function ProfileBox({content, userFile}) {
   let [buttonText, setButtonText] = useState('Edit')
   let [value, setValue] = useState(content)
   let [formDisabled, setFormDisabled] = useState(true)
@@ -20,6 +29,7 @@ function ProfileBox({content}) {
       <input type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
       <span> </span>
       <input type='button' value={buttonText} onClick={buttonClick}/>
+      {userFile && userFileButton()}
     </>
   )
 }
