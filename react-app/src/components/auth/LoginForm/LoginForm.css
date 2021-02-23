@@ -1,0 +1,10 @@
+.login__container{
+    background-color: rgba(119, 166, 247, .9);
+    height: 17rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__title{
+    color: white;
+}

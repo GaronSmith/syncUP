@@ -4,7 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 
 import { setUser } from "../../../store/session"
 import { login } from "../../../services/auth";
-
+import './LoginForm.css'
 const LoginForm = ({ authenticated, setAuthenticated }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -37,34 +37,39 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type="submit">Login</button>
-      </div>
-    </form>
+    <div className= 'login__container'>
+      <h1 className='form__title'>Login</h1>
+      <form className='login__form' onSubmit={onLogin}>
+        <div className='login__errors' >
+          {errors.map((error) => (
+            <div>{error}</div>
+          ))}
+        </div>
+        <div className= 'form_field-container'>
+          <div className='form__field'>
+            <label className='form__field-label' htmlFor="email">Email</label>
+            <input className='form__field-input'
+              name="email"
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div className='form__field'>
+            <label className='form__field-label' htmlFor="password">Password</label>
+            <input className='form__field-input'
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={updatePassword}
+            />
+            <button type="submit">Login</button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
