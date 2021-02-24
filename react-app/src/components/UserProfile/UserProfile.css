@@ -14,7 +14,6 @@
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   background-color: white;
   padding: 5px;
-  padding-left: 5px;
   margin: 2px;
   margin-top: 10px;
   border-radius: 10px;
@@ -36,7 +35,6 @@
   height: 200px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   padding: 5px;
-  padding-left: 5px;
   margin-left: 5px;
   margin-right: 5px;
   display: flex;
@@ -60,15 +58,13 @@
   display: flex;
   padding: 10px;
   line-height: 1rem;
-  height: 230px;
+  height: 240px;
   overflow-x: auto;
   overflow-y: hidden;
-  box-sizing: border-box;
 }
 
-.profile_box-container {
-  width: 100%;
-  box-sizing: border-box;
+.spacer {
+  padding-right: 10px;
 }
 
 #profile_group-name{

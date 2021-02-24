@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required
+from ..helpers import s3, upload_file_to_s3, allowed_file
 from app.models import User, db
 import json
 
@@ -18,6 +19,14 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/image', methods=['post'])
+@login_required
+def get_image_url():
+    url = upload_file_to_s3(request.files['imageFile'])
+
+    return url
 
 
 @user_routes.route('/<int:id>', methods=['put'])

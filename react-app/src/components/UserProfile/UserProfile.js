@@ -50,7 +50,6 @@ function UserProfile() {
       </div>
 
       <h2>Groups</h2>
-      <div className='profile_box-container'>
         <div className='profile_box groups'>
           <GroupCard group={demoGroup}/>
           <GroupCard group={demoGroup2}/>
@@ -60,8 +59,8 @@ function UserProfile() {
           <GroupCard group={demoGroup2}/>
           <GroupCard group={demoGroup}/>
           <GroupCard group={demoGroup2}/>
+          <div className='spacer'/>
         </div>
-      </div>
 
       <div className='profile_box'>
         <h2>Moderation Panel</h2>

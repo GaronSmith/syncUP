@@ -1,3 +1,4 @@
+import axios from 'axios';
 // Action Constants
 
 export const SET_OPTION = 'users/SET_OPTION'
@@ -24,6 +25,23 @@ export const editUser = (userId, column, val) => async (dispatch) => {
     console.log(user)
     dispatch(setUserOption(user))
   }
+}
+
+export const uploadUserImage = (imageFile) => async () => {
+
+  if(!imageFile) return;
+
+  const formData = new FormData();
+
+  formData.append("imageFile", imageFile);
+
+  const response = await axios.post(`/api/users/image`, formData, {
+    headers: {
+      "content-type": "multipart/form-data",
+    },
+  });
+  console.log(response.data)
+  return response.data;
 }
 
 //Reducer
