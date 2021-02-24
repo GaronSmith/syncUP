@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ResetPasswordModal from './ResetPassword'
 import { useSelector } from 'react-redux';
 import ProfileBox from './ProfileBox';
 import GroupCard from './GroupCard'
@@ -31,7 +32,7 @@ const demoGroup2 = {
 function UserProfile() {
 
   let user = useSelector(state => state.session.user) || demoUser;
-
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className='profile'>
       <h2>User Profile</h2>
@@ -42,7 +43,8 @@ function UserProfile() {
           <p>Email Address <ProfileBox label='email' content={user.email}/></p>
           <p>Location <ProfileBox label='location' content={user.location}/></p>
           <p>Profile Picture <ProfileBox label='image_url' content={user.image_url} userFile={true}/></p>
-          <p>Password <ProfileBox label='password' content={'*************'}/></p>
+          {/* TODO: Implement Change Password Button */}
+          <p><input type='button' value='Change Password' onClick={()=> setShowModal(true)}/></p>
         </div>
         <div className='profile_user--right'>
           <div className='profile_picture' style={{ backgroundImage: `url(${user.image_url})`}}/>
@@ -69,6 +71,8 @@ function UserProfile() {
       <div className='profile_box'>
         <h2>Administration Panel</h2>
       </div>
+
+      <ResetPasswordModal showModal={showModal} setShowModal={setShowModal} />
 
     </div>
   );

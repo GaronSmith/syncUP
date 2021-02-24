@@ -86,3 +86,35 @@
   margin-top: 5px;
   padding: 5px;
 }
+
+.reset-password-field {
+  background-color: #00887a;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30vw;
+  height: 75vh;
+}
+
+.password-errors {
+  color:red;
+  background-color: #004b44;
+}
+
+.reset-password-field input {
+  height: 1.5rem;
+}
+
+.reset-password-field label {
+  font-weight: bold;
+}
+
+#reset-password-button {
+  height: 2rem;
+}
+
+.password_field {
+  display: flex;
+  flex-direction: column;
+}
