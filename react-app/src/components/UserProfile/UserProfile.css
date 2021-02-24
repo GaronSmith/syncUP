@@ -63,11 +63,12 @@
   height: 230px;
   overflow-x: auto;
   overflow-y: hidden;
+  box-sizing: border-box;
 }
 
 .profile_box-container {
   width: 100%;
-  margin-right: 50px;
+  box-sizing: border-box;
 }
 
 #profile_group-name{

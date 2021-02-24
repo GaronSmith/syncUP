@@ -18,7 +18,6 @@ export const editUser = (userId, column, val) => async (dispatch) => {
     method: 'put',
     body: JSON.stringify({column, val})
   }
-  console.log('Thunkin');
   const response = await fetch(`/api/users/${userId}`, opts);
   if(response.ok) {
     const user = await response.json();
