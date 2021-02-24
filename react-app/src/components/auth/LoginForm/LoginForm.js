@@ -68,7 +68,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
             />
           </div>
           <div id='form__button-container'>
-            <button className='form__field form__button'type="submit">Login</button>
+            <button className='form__field form__button' type="submit">Login</button>
           </div>
         </div>
       </form>
