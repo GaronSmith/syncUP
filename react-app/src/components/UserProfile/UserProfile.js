@@ -50,9 +50,17 @@ function UserProfile() {
       </div>
 
       <h2>Groups</h2>
-      <div className='profile_box groups'>
+      <div className='profile_box-container'>
+        <div className='profile_box groups'>
           <GroupCard group={demoGroup}/>
           <GroupCard group={demoGroup2}/>
+          <GroupCard group={demoGroup}/>
+          <GroupCard group={demoGroup2}/>
+          <GroupCard group={demoGroup}/>
+          <GroupCard group={demoGroup2}/>
+          <GroupCard group={demoGroup}/>
+          <GroupCard group={demoGroup2}/>
+        </div>
       </div>
 
       <div className='profile_box'>
