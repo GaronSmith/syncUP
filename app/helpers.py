@@ -13,8 +13,13 @@ s3 = boto3.client(
         "S3_SECRET_ACCESS_KEY"),
 )
 S3_BUCKET = "syncup-project"
-S3_BUCKET_SERVER = s3.get_bucket_location(Bucket=S3_BUCKET)[
-    'LocationConstraint']
+
+try:
+    S3_BUCKET_SERVER = s3.get_bucket_location(Bucket=S3_BUCKET)[
+        'LocationConstraint']
+except Exception as e:
+    print(f"S3 ERROR: {e}")
+
 S3_LOCATION = f'http://{S3_BUCKET}.s3.{S3_BUCKET_SERVER}.amazonaws.com/'
 
 
