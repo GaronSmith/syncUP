@@ -21,6 +21,7 @@ export const searchEvents = (val) => async (dispatch) => {
     })
     if(response.ok){
         const events = await response.json()
+        console.log(events)
         let obj = {}
         Object.keys(events.events).forEach(el => {
             obj[events.events[el].id] = events.events[el]

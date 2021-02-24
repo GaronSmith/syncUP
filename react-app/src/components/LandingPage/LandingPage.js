@@ -15,8 +15,9 @@ const LandingPage = () => {
         if(searchEvents){
             setUniqueDates([...new Set(Object.keys(searchEvents).map(eventId => {
                 return searchEvents[eventId].date.split(' ').slice(0,4).join(' ')}
-                ))])
+                ))].sort((a,b) => new Date(a) - new Date(b)))
         }
+        console.log(searchEvents)
     },[searchEvents])
     
     return (
