@@ -1,7 +1,7 @@
 import  { useEffect } from 'react';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { searchEvents } from '../../../store/events';
+import { removeEvents, searchEvents } from '../../../store/events';
 import './SearchForm.css'
 
 const SearchForm = () => {
@@ -11,7 +11,12 @@ const SearchForm = () => {
     const [endDate, setEndDate] = useState()
 
     useEffect(() => {
-        dispatch(searchEvents(searchValue))
+        
+        dispatch(removeEvents())
+        if(searchValue){
+            dispatch(searchEvents(searchValue))
+        }
+        
     },[searchValue, dispatch])
     return (
         <div className= 'search__container'>
