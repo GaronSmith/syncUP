@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
+import SearchForm from "./components/LandingPage/SearchForm/SearchForm";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -39,7 +40,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
+          <SearchForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

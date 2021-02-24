@@ -7,7 +7,7 @@ const setEvents = (events) => {
     }
 }
 
-export const searchEvents(val) => async (dispatch) => {
+export const searchEvents = (val) => async (dispatch) => {
     const response = await fetch('/api/events', {
         method:'POST',
         body: JSON.stringify({val})

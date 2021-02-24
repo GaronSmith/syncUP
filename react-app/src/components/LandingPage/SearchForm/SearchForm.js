@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import { useState } from 'react'
+import  { useEffect } from 'react';
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { searchEvents } from '../../../store/events';
 import './SearchForm.css'
 
-const  SearchForm = () => {
-    const dispatch = useDispatch
+const SearchForm = () => {
+    const dispatch = useDispatch()
     const [searchValue, setSearchValue] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState()
