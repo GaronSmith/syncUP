@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import DateCard from './DateCard/DateCard'
 import EventsCard from './EventsCard/EventsCard'
 
 import './LandingPage.css'
@@ -12,7 +13,9 @@ const LandingPage = () => {
 
     useEffect(() => {
         if(searchEvents){
-            setUniqueDates([...new Set(Object.keys(searchEvents).map(eventId => searchEvents[eventId].date.split(' ').slice(0,4).join(' ')))])
+            setUniqueDates([...new Set(Object.keys(searchEvents).map(eventId => {
+                searchEvents[eventId].date.split(' ').slice(0,4).join(' ')}
+                ))])
         }
     },[searchEvents])
     
@@ -23,20 +26,17 @@ const LandingPage = () => {
             <SearchForm />
             <div className='results_container'>
                 <div className='results__events'>
-
-                    {searchEvents && uniqueDates && uniqueDates.map(date => {
-                        return (
-                            Object.keys(searchEvents).map(eventId => {
-                            const event = searchEvents[eventId]
-                            if(event.date.split(' ').slice(0,4).join(' ')=== date){
-                                console.log('hit')
-                                return <EventsCard key={eventId} event={event} />
-                            }
-                            
+                    {uniqueDates && uniqueDates.map(date => {
+                        const events = Object.values(searchEvents).filter(event => {
+                            return event.date.split(' ').slice(0, 4).join(' ') === date
                         })
-                    })
-                    
-                    }
+                        return (
+                            <DateCard date={date} 
+                            events={events}
+                            key={date}
+                            />
+                        )
+                    })}
                 </div>
                 <div className='results__tags'>
                     
