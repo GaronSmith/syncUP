@@ -14,13 +14,11 @@ const LandingPage = () => {
     useEffect(() => {
         if(searchEvents){
             setUniqueDates([...new Set(Object.keys(searchEvents).map(eventId => {
-                searchEvents[eventId].date.split(' ').slice(0,4).join(' ')}
+                return searchEvents[eventId].date.split(' ').slice(0,4).join(' ')}
                 ))])
         }
     },[searchEvents])
     
-    console.log(uniqueDates)
-
     return (
         <div className='landing__container'>
             <SearchForm />
