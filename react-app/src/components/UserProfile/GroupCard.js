@@ -7,9 +7,9 @@ function GroupCard({group}) {
         <div className='profile_group-picture' style={{ backgroundImage: `url(${group.image_url})`}}/>
       </div>
       <div className='profile_group-card--bottom'>
-        <p>{group.name}</p>
-        <p>{group.location}</p>
-        <p>{group.description}</p>
+        <p id='profile_group-name'>{group.name}</p>
+        <p id='profile_group-location'>{group.location}</p>
+        <p id='profile_group-description'>{group.description}</p>
       </div>
     </div>
   )
