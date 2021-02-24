@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import SignUpForm from "./components/auth/SignUpForm";
+import SignUpForm from "./components/auth/SignUpForm/SignUpForm";
 import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
+import UserProfile from "./components/UserProfile"
 import User from "./components/User";
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
@@ -24,7 +25,7 @@ function App() {
       }
       setLoaded(true);
     })();
-  }, []);
+  }, [dispatch]);
 
   if (!loaded) {
     return null;
@@ -40,6 +41,10 @@ function App() {
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
           <UsersList/>
         </ProtectedRoute>
+        {/* TODO: Make /users/me protected. */}
+        <Route exact path="/users/me" authenticated={authenticated}>
+          <UserProfile/>
+        </Route>
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
