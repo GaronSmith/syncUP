@@ -6,6 +6,7 @@
     width: 80%;
     text-align: center;
     margin-top: 1rem;
+    border-radius: 5px;
 }
 
 .form__title{
