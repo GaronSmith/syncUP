@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { editUser } from '../../store/user'
 
 function userFileButton() {
   return (
@@ -12,7 +13,7 @@ function userFileButton() {
 
 function ProfileBox({label, content, userFile}) {
   let [buttonText, setButtonText] = useState('Edit');
-  let [value, setValue] = useState(content);
+  let [value, setValue] = useState(content||'');
   let [formDisabled, setFormDisabled] = useState(true);
   let user = useSelector(state => state.session.user)
   const dispatch = useDispatch();
@@ -27,8 +28,9 @@ function ProfileBox({label, content, userFile}) {
     } else {
       setFormDisabled(true);
       setButtonText('Edit');
-      if(content === initialValue) return;
-
+      console.log('Before the return')
+      if(value === initialValue) return;
+      console.log('Submitting')
       dispatch(editUser(user.id, label, value))
     }
   }

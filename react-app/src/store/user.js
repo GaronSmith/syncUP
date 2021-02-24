@@ -15,12 +15,15 @@ const setUserOption = (user) => {
 
 export const editUser = (userId, column, val) => async (dispatch) => {
   const opts = {
-    method: 'update',
+    method: 'put',
     body: JSON.stringify({column, val})
   }
-  const response = await fetch(`/api/users/${userId}`);
+  console.log('Thunkin');
+  const response = await fetch(`/api/users/${userId}`, opts);
   if(response.ok) {
-    dispatch(setUserOption(response.data))
+    const user = await response.json();
+    console.log(user)
+    dispatch(setUserOption(user))
   }
 }
 
