@@ -5,13 +5,10 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import SearchForm from './components/LandingPage/SearchForm'
 import { authenticate } from "./services/auth";
-<<<<<<< HEAD
-import SearchForm from "./components/LandingPage/SearchForm/SearchForm";
-=======
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
->>>>>>> main
 
 function App() {
   const dispatch = useDispatch();
