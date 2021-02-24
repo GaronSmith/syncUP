@@ -18,4 +18,14 @@ class Group(db.Model):
 
     owner = db.relationship('User')
     users = db.relationship(
-      'User', secondary=group_members, back_populates='groups')
+        'User', secondary=group_members, back_populates='groups')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "location": self.location,
+            "is_private": self.is_private,
+            "owner_name": self.owner.first_name
+        }

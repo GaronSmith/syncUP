@@ -8,6 +8,7 @@ import User from "./components/User";
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
+import GroupPage from "./components/GroupPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function App() {
       }
       setLoaded(true);
     })();
-  }, []);
+  }, [dispatch]);
 
   if (!loaded) {
     return null;
@@ -45,6 +46,9 @@ function App() {
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <h1>My Home Page</h1>
         </ProtectedRoute>
+        <Route path="/groups/:groupId" exact={true}>
+          <GroupPage />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
