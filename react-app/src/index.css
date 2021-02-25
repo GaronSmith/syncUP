@@ -1,4 +1,50 @@
-/* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fanwood+Text&display=swap');
+
+/* ---------------------------------------------- */
+/* Site-wide*/
+/* ---------------------------------------------- */
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Fanwood Text', serif;
+}
+
 body {
   background-color: #F3F7FE;
+  font-family: 'Martel', serif;
+}
+
+p {
+  font-family: 'Fanwood Text', serif;
+}
+
+input[type=text] {
+  padding: 4px;
+  width: 200px;
+  -webkit-transition: width .35s ease-in-out;
+  transition: width .35s ease-in-out;
+}
+input[type=text]:focus {
+  width: 300px;
+}
+
+input[type=button] {
+  padding: 4px;
+  background-color: #F3F7FE;
+  border: 2px #77A6F7 solid;
+}
+
+input[type=button]:hover {
+  cursor: pointer;
+}
+
+
+button {
+  padding: 4px;
+  background-color: #F3F7FE;
+  border: 2px #77A6F7 solid;
+}
+
+button:hover{
+  cursor: pointer;
 }

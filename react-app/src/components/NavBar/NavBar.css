@@ -12,6 +12,15 @@
     margin-left: 1rem;
 }
 
+.navbar__container-middle {
+    font-size: xx-large;
+    border: solid 5px #77A6F7;
+    background-color: #00887A;
+    padding: 5px;
+    color: #F3F7FE;
+    text-shadow: 2px 2px black;
+}
+
 .navbar__container-right{
     display: flex;
     justify-content: space-between;
@@ -51,6 +60,10 @@
 
 .profile-dropdown a{
     text-decoration: none;
+    font-size: .75rem;
+    background-color: #77A6F7;
+    width: 100%;
+    text-align: center;
 }
 
   .hr{
@@ -62,4 +75,8 @@
   #profile-dropdown__user {
       font-size: .75rem;
       font-weight: bold;
+  }
+
+  #logout-button {
+      margin-top: 10px;
   }

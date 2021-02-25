@@ -9,6 +9,7 @@ import User from "./components/User";
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
   }
 
   return (
+    <>
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} authenticated ={authenticated} />
       <Switch>
@@ -52,6 +54,8 @@ function App() {
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
+    <Footer />
+    </>
   );
 }
 

@@ -14,6 +14,9 @@ const NavBar = ({ setAuthenticated, authenticated }) => {
               Home
             </NavLink>
           </div>
+          <div className='navbar__container-middle'>
+            syncUP
+          </div>
            <div className= 'navbar__container-right'>
             {!authenticated &&
               <>
@@ -25,7 +28,7 @@ const NavBar = ({ setAuthenticated, authenticated }) => {
               <ProfileImage setAuthenticated={setAuthenticated}/>
             }
           </div>
-          
+
       </div>
     </nav>
   );
