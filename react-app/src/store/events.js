@@ -1,7 +1,7 @@
 const SET_EVENTS = 'events/setEvents'
 const REMOVE_EVENTS = 'events/removeEvents'
 
-const setEvents = (events) => {
+export const setEvents = (events) => {
     return {
         type: SET_EVENTS,
         payload: events
@@ -13,6 +13,7 @@ export const removeEvents = () => {
         type: REMOVE_EVENTS,
     }
 }
+
 
 export const searchEvents = (val, bool, groups, start_date, end_date) => async (dispatch) => {
     const response = await fetch('/api/events/', {
