@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Event
+from app.models import Event, Tag
 from sqlalchemy import asc, desc, and_
 from sqlalchemy.orm import joinedload
 from datetime import datetime, timedelta
@@ -31,4 +31,12 @@ def events():
                                     filter(and_(Event.date >= start_date,
                                                 Event.date <= end_date))
         return {"events": [event.to_dict() for event in events]}
+
+
+@events_routes.route('/tag', methods=['POST'])
+def event_tags():
+    data = json.loads(request.data)
+    val = data['val']
+    tags = Tag.query.options(joinedload(Tag.group)).\
+        order_by(asc(Tag.date)).filter(Tag.name.like(f'%{val}%'))
 
