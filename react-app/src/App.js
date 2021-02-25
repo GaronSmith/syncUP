@@ -10,6 +10,7 @@ import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
 import Footer from "./components/Footer";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
+          <LandingPage />
         </ProtectedRoute>
       </Switch>
     </div>
