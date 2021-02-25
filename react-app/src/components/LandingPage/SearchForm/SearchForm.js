@@ -8,8 +8,8 @@ const SearchForm = () => {
     const dispatch = useDispatch()
     const [searchValue, setSearchValue] = useState('');
     const [searchMyGroups, setSearchMyGroups] = useState(false)
-    // const [startDate, setStartDate] = useState(new Date());
-    // const [endDate, setEndDate] = useState()
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date(2050, 1))
 
     const user = useSelector(state => state.session.user)
 
@@ -17,10 +17,10 @@ const SearchForm = () => {
         
         dispatch(removeEvents())
         if(searchValue){
-            dispatch(searchEvents(searchValue, searchMyGroups, user.groups))
+            dispatch(searchEvents(searchValue, searchMyGroups, user.groups, startDate, endDate))
         }
         
-    },[searchValue,user, dispatch])
+    },[searchValue, user, startDate, endDate, dispatch])
     return (
         <div className= 'search__container'>
             <h1 className= 'form__title'>Search for your next syncUP event</h1>
@@ -41,6 +41,24 @@ const SearchForm = () => {
                             className='search__input'
                             checked={Boolean(searchMyGroups)}
                             onChange={(e) => setSearchMyGroups(!searchMyGroups)}
+                        />
+                    </div>
+                    <div className='search__input-container'>
+                        <label className="search__label">Start Date</label>
+                        <input
+                            type='date'
+                            className='search__input'
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                        />
+                    </div>
+                    <div className='search__input-container'>
+                        <label className="search__label">End Date</label>
+                        <input
+                            type='date'
+                            className='search__input'
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
                         />
                     </div>
                 </form>

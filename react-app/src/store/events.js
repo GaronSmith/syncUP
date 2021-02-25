@@ -14,10 +14,10 @@ export const removeEvents = () => {
     }
 }
 
-export const searchEvents = (val, bool, groups) => async (dispatch) => {
+export const searchEvents = (val, bool, groups, start_date, end_date) => async (dispatch) => {
     const response = await fetch('/api/events/', {
         method:'POST',
-        body: JSON.stringify({val})
+        body: JSON.stringify({val, start_date, end_date})
     })
     if(response.ok){
         const events = await response.json()
