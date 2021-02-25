@@ -1,14 +1,22 @@
 .events-card__container{
     display: flex;
     flex-direction: row;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem;    
+    width: 750px;
+    height: 150px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    transition: all .2s ease-in-out;
 }
 
-.events-card__left 
-.events-card__right 
+.events-card__left, 
+.events-card__right, 
 .events-card__middle{
     display: flex;
     flex-direction: column;
+    margin-left: 2rem;
 }
 
 .events__image {
@@ -21,4 +29,30 @@
   box-shadow: 2px 2px 10px ;
   border-radius: 5px;
   background-color: rgba(119, 166, 247, 0.3);
+}
+
+.event-card__title{
+    text-decoration: none;
+    color: black;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.event-card__group{
+    text-decoration: none;
+    color: grey;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.profile_group-card {
+  width: 200px;
+  height: 200px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+  transition: all .2s ease-in-out;
 }
