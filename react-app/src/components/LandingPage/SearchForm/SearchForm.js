@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { removeEvents, searchEvents } from '../../../store/events';
 import './SearchForm.css'
+import { searchTags } from '../../../store/tags';
 
 const SearchForm = () => {
     const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const SearchForm = () => {
         dispatch(removeEvents())
         if(searchValue){
             dispatch(searchEvents(searchValue, searchMyGroups, user.groups, startDate, endDate))
+            dispatch(searchTags(searchValue))
         }
         
     },[searchValue, searchMyGroups, user, startDate, endDate, dispatch])

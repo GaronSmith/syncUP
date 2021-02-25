@@ -33,10 +33,10 @@ def events():
         return {"events": [event.to_dict() for event in events]}
 
 
-@events_routes.route('/tag', methods=['POST'])
+@events_routes.route('/tags', methods=['POST'])
 def event_tags():
     data = json.loads(request.data)
     val = data['val']
-    tags = Tag.query.options(joinedload(Tag.group)).\
-        order_by(asc(Tag.date)).filter(Tag.name.like(f'%{val}%'))
+    tags = Tag.query.order_by(asc(Tag.name)).filter(Tag.name.like(f'%{val}%'))
 
+    return {"tags": [tag.to_dict() for tag in tags]}

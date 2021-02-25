@@ -16,5 +16,5 @@ class Tag(db.Model):
       return{
         "id": self.id,
         'name': self.name,
-        "events": [event.to_dict for event in self.events]
+        "events": [event.to_dict() for event in self.events]
       }

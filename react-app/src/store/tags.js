@@ -2,7 +2,7 @@ const SET_TAGS = 'tags/setTags'
 
 const setTags = (tags) => {
     return {
-        type: setTags,
+        type: SET_TAGS,
         payload: tags
     }
 }
@@ -23,7 +23,7 @@ export const searchTags = (val) => async (dispatch) => {
     dispatch(setTags(obj))
 }
 
-const initialState = {tags: null}
+const initialState = {tagResults: null}
 
 const tagsReducer = (state=initialState, action) => {
     let newState
