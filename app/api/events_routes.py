@@ -19,19 +19,6 @@ def events():
         events = Event.query.options(joinedload(Event.group)).\
                 order_by(asc(Event.date)).filter(Event.name.like(f'%{val}%'))
         return {"events": [event.to_dict() for event in events]}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     elif (start_date and not end_date):
         end_date = start_date + timedelta(weeks=500)
         events = Event.query.options(joinedload(Event.group)).order_by(
