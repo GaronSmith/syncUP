@@ -1,0 +1,24 @@
+.events-card__container{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+
+.events-card__left 
+.events-card__right 
+.events-card__middle{
+    display: flex;
+    flex-direction: column;
+}
+
+.events__image {
+  height:125px;
+  width: 125px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 2px;
+  box-shadow: 2px 2px 10px ;
+  border-radius: 5px;
+  background-color: rgba(119, 166, 247, 0.3);
+}

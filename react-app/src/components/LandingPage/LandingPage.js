@@ -25,7 +25,7 @@ const LandingPage = () => {
             <SearchForm />
             <div className='results_container'>
                 <div className='results__events'>
-                    {uniqueDates && uniqueDates.map(date => {
+                    {searchEvents && uniqueDates && uniqueDates.map(date => {
                         const events = Object.values(searchEvents).filter(event => {
                             return event.date.split(' ').slice(0, 4).join(' ') === date
                         })
