@@ -8,6 +8,11 @@
     margin-top: 1rem;
     border-radius: 5px;
 }
+.search_form{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
 
 .form__title{
     align-self: center;

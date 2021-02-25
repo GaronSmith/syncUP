@@ -7,6 +7,7 @@ import './SearchForm.css'
 const SearchForm = () => {
     const dispatch = useDispatch()
     const [searchValue, setSearchValue] = useState('');
+    const [searchMyGroups, setSearchMyGroups] = useState(false)
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState()
 
@@ -28,6 +29,15 @@ const SearchForm = () => {
                     className='search__input'
                     value= {searchValue}
                     onChange= {(e) => setSearchValue(e.target.value)}
+                    />
+                </div>
+                <div className='search__input-container'>
+                    <label className="search__label">Search only my groups</label>
+                    <input 
+                    type='checkbox' 
+                    className='search__input'
+                    checked = {Boolean(searchMyGroups)}
+                    onChange= {(e) => setSearchMyGroups(!searchMyGroups)}
                     />
                 </div>
             </form>
