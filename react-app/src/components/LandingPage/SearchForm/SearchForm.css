@@ -1,0 +1,26 @@
+.search__container{
+    background-color: #00887A;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 80%;
+    text-align: center;
+    margin-top: 1rem;
+    border-radius: 5px;
+}
+.search-form__container{
+    align-self: center;
+}
+.search_form{
+    display: flex;
+    flex-direction: row;
+}
+
+.form__title{
+    align-self: center;
+}
+
+.search__label{
+    margin-left: 1rem;
+    color: #F3F7FE;
+}

@@ -26,3 +26,20 @@ class Event(db.Model):
       'Tag', secondary=event_tags, back_populates='events')
     users = db.relationship(
       'User', secondary=event_rsvps, back_populates='events')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "owner_id": self.owner_id,
+            "group_id": self.group_id,
+            "details": self.details,
+            "location": self.location,
+            "image_url": self.image_url,
+            "date": self.date,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "capacity": self.capacity,
+            "group": self.group.name,
+            "rsvps": len(self.users)
+        }
