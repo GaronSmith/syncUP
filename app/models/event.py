@@ -40,5 +40,6 @@ class Event(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "capacity": self.capacity,
-            "group": self.group.name
+            "group": self.group.name,
+            "rsvps": len(self.users)
         }
