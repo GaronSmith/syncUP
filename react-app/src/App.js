@@ -35,6 +35,7 @@ function App() {
     <>
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} authenticated ={authenticated} />
+      <div className='content'>
       <Switch>
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
@@ -53,6 +54,7 @@ function App() {
           <h1>My Home Page</h1>
         </ProtectedRoute>
       </Switch>
+    </div>
     </BrowserRouter>
     <Footer />
     </>
