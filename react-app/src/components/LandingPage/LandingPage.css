@@ -3,3 +3,20 @@
     flex-direction: column;
     align-items: center;
 }
+
+.results__container{
+   display: flex;
+   flex-direction: row; 
+   width:100%;
+   align-items:center
+}
+
+.results__tags{
+    width: 20rem;
+    height: 30rem;
+    border: 1px solid black;
+    margin-left: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
