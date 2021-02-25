@@ -5,17 +5,10 @@ import sessionReducer from './session';
 import groupReducer from './groups'
 import userReducer from './user';
 
-<<<<<<< HEAD
 const rootReducer = combineReducers({
     session: sessionReducer,
     group: groupReducer,
-=======
-
-
-const rootReducer = combineReducers({
-    session: sessionReducer,
-    events:eventsReducer,
->>>>>>> main
+    events: eventsReducer,
     user: userReducer
 })
 
