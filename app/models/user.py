@@ -43,4 +43,5 @@ class User(db.Model, UserMixin):
           "last_name": self.last_name,
           "image_url": self.image_url,
           "location": self.location,
+          "groups": [group.id for group in self.groups],
       }

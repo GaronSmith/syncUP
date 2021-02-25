@@ -10,6 +10,7 @@ import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
 import GroupPage from "./components/GroupPage";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
+          <LandingPage />
         </ProtectedRoute>
         <Route path="/groups/:groupId" exact={true}>
           <GroupPage />
