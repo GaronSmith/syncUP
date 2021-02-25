@@ -20,3 +20,7 @@ def events():
 def event(id):
     event = Event.query.get(id)
     return event.to_dict()
+
+
+# TO DO: POST /api/events/new
+# TO DO: POST /api/events/:id

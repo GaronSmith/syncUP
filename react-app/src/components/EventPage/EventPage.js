@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -18,7 +18,23 @@ function EventPage() {
         <>
             {storeEvent && (
                 <>
-                    <h1>TESTING EVENT PAGE</h1>
+                    <div className='event__container'>
+                        <div className='event__name'>
+                            <h2>{storeEvent.name}</h2>
+                        </div>
+                        <div className='event__image'>
+                            PICTURE DIV
+                        </div>
+                        <div className='event__description'>
+                            DESCRIPTION DIV
+                        </div>
+                        <div className='event__information_container'>
+                            INFORMATION DIV
+                        </div>
+                        <div className='event__attendees'>
+                            ATTENDEES DIV
+                        </div>
+                    </div>
                 </>
             )}
         </>
