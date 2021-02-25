@@ -19,14 +19,16 @@ const EventCard = () => {
                 </div>
                 
                 <div className='event__info'>
-                    <h2>Event name</h2>
-                    <h3>Host: </h3>
-                    <h3>Event Details:</h3>
-                    <h3>Spots remaining:</h3>
+                    <h3>Event name</h3>
+                    <p>Host: </p>
+                    <p>Event Details:</p>
+                    <p>Spots remaining:</p>
                 </div>
 
                 <div className='event__time'>
-                    <h2>8:00 p.m.</h2>
+                    <div className='time__div'>
+                        <h2>8:00 p.m.</h2>
+                    </div>
                 </div>
             </div>
         </>

@@ -41,12 +41,16 @@ const GroupPage = ()=> {
                         <h2>Description</h2>
                     </div>
                     
-                    <div>
+                    <div className='description'>
                         <p> {group.description}</p>
                     </div>
                 </div>
 
                 <div className='group__events'>
+                    <div>
+                        <h2>Events</h2>
+                    </div>
+
                     <EventCard />
                 </div>
 

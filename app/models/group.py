@@ -27,5 +27,6 @@ class Group(db.Model):
             "description": self.description,
             "location": self.location,
             "is_private": self.is_private,
-            "owner_name": self.owner.first_name
+            "owner_name": self.owner.first_name,
+            "image_url": self.image_url
         }
