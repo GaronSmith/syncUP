@@ -9,6 +9,7 @@ import SearchForm from './SearchForm'
 const LandingPage = () => {
 
     const searchEvents = useSelector(state => state.events.search_results)
+    const user = useSelector(state => state.session.user)
     const [uniqueDates, setUniqueDates] = useState(new Array());
 
     useEffect(() => {

@@ -14,18 +14,27 @@ export const removeEvents = () => {
     }
 }
 
-export const searchEvents = (val) => async (dispatch) => {
+export const searchEvents = (val, bool, groups) => async (dispatch) => {
     const response = await fetch('/api/events/', {
         method:'POST',
         body: JSON.stringify({val})
     })
     if(response.ok){
         const events = await response.json()
-        console.log(events)
         let obj = {}
-        Object.keys(events.events).forEach(el => {
-            obj[events.events[el].id] = events.events[el]
-        })
+        if(bool){
+                Object.keys(events.events).forEach(el => {
+                    if (groups.indexOf(events.events[el].group_id) !== -1) {
+                        obj[events.events[el].id] = events.events[el]
+                    }
+                })
+            
+        } else{
+            Object.keys(events.events).forEach(el => {
+                obj[events.events[el].id] = events.events[el]
+            })
+        }
+        
         dispatch(setEvents(obj))
     }
 }
