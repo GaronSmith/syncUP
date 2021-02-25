@@ -1,6 +1,5 @@
 .footer__container {
   background-color: #77A6F7 ;
-  border-radius: 10px;
   height: 100px;
   margin-top: 25px;
   display: flex;
@@ -19,7 +18,7 @@
 .footer__tech-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: column;
   align-items: center;
   background-color: whitesmoke;
   padding: 5px;
@@ -29,21 +28,9 @@
   border-radius: 5px;
 }
 
-.footer__tech-name {
-  line-height: 1rem;
-  font-size: .85rem;
-  text-align: center;
-  height: 50%;
-  display: flex;
-}
-
-.footer__tech-name.smaller {
-  font-size: .75rem;
-}
-
 .footer__tech-image {
   width: 50px;
-  height: 50%;
+  height: 100%;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

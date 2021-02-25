@@ -17,7 +17,7 @@ function Footer() {
           <Technology img='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png' name='React'/>
           <Technology img='https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png' name='Redux'/>
           <Technology img='https://invenio-software.org/static/img/logo-flask.svg' name='Flask'/>
-          <Technology img='https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/The_Witcher_3-Alchemy_Icon.svg/768px-The_Witcher_3-Alchemy_Icon.svg.png' name='SQL Alchemy' optionalClass='smaller'/>
+          <Technology img='https://flask-sqlalchemy.palletsprojects.com/en/2.x/_static/flask-sqlalchemy-logo.png' name='SQL Alchemy' optionalClass='smaller'/>
         </div>
       </div>
     </footer>
