@@ -9,11 +9,8 @@ import userReducer from './user';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
-<<<<<<< HEAD
     event: eventReducer,
-=======
     events:eventsReducer,
->>>>>>> main
     user: userReducer
 })
 
