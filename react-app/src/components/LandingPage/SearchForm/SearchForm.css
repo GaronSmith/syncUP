@@ -8,12 +8,19 @@
     margin-top: 1rem;
     border-radius: 5px;
 }
+.search-form__container{
+    align-self: center;
+}
 .search_form{
     display: flex;
     flex-direction: row;
-    text-align: center;
 }
 
 .form__title{
     align-self: center;
+}
+
+.search__label{
+    margin-left: 1rem;
+    color: #F3F7FE;
 }

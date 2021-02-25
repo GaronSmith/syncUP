@@ -17,30 +17,33 @@ const SearchForm = () => {
         if(searchValue){
             dispatch(searchEvents(searchValue))
         }
+        console.log(searchMyGroups)
         
-    },[searchValue, dispatch])
+    },[searchValue, searchMyGroups, dispatch])
     return (
         <div className= 'search__container'>
             <h1 className= 'form__title'>Search for your next syncUP event</h1>
-            <form className='search_form'>
-                <div className='search__input-container'>
-                    <input 
-                    type='text' 
-                    className='search__input'
-                    value= {searchValue}
-                    onChange= {(e) => setSearchValue(e.target.value)}
-                    />
-                </div>
-                <div className='search__input-container'>
-                    <label className="search__label">Search only my groups</label>
-                    <input 
-                    type='checkbox' 
-                    className='search__input'
-                    checked = {Boolean(searchMyGroups)}
-                    onChange= {(e) => setSearchMyGroups(!searchMyGroups)}
-                    />
-                </div>
-            </form>
+            <div className='search-form__container'>
+                <form className='search_form'>
+                    <div className='search__input-container'>
+                        <input
+                            type='text'
+                            className='search__input'
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                        />
+                    </div>
+                    <div className='search__input-container'>
+                        <label className="search__label">Search only my groups</label>
+                        <input
+                            type='checkbox'
+                            className='search__input'
+                            checked={Boolean(searchMyGroups)}
+                            onChange={(e) => setSearchMyGroups(!searchMyGroups)}
+                        />
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
