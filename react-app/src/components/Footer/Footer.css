@@ -1,0 +1,37 @@
+.footer__container {
+  background-color: #77A6F7 ;
+  height: 100px;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__technologies, .footer__contributors {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 25px;
+}
+
+.footer__tech-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: column;
+  align-items: center;
+  background-color: whitesmoke;
+  padding: 5px;
+  margin: 0px 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.footer__tech-image {
+  width: 50px;
+  height: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

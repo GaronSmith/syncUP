@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginFormModal from '../auth/LoginForm';
 import SignUpFormModal from '../auth/SignUpForm';
-import LogoutButton from '../auth/LogoutButton';
+import ProfileImage from './ProfileImage'
 import "./NavBar.css"
 const NavBar = ({ setAuthenticated, authenticated }) => {
   return (
@@ -14,17 +14,22 @@ const NavBar = ({ setAuthenticated, authenticated }) => {
               Home
             </NavLink>
           </div>
-           <div className= 'navbar__container-right'>
-            {!authenticated && <>
-              <LoginFormModal setAuthenticated={setAuthenticated} authenticate={authenticated} />
-              <SignUpFormModal setAuthenticated={setAuthenticated} authenticate={authenticated} />
-          </>
-            }
-
-          {authenticated && <LogoutButton setAuthenticated={setAuthenticated} />}
+          <div className='navbar__container-middle'>
+            syncUP
           </div>
-      </div>
+           <div className= 'navbar__container-right'>
+            {!authenticated &&
+              <>
+                <LoginFormModal setAuthenticated={setAuthenticated} authenticate={authenticated} />
+                <SignUpFormModal setAuthenticated={setAuthenticated} authenticate={authenticated} />
+              </>
+            }
+            {authenticated &&
+              <ProfileImage setAuthenticated={setAuthenticated}/>
+            }
+          </div>
 
+      </div>
     </nav>
   );
 }
