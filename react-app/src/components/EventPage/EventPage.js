@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons'
-import { getEvent } from '../../store/event';
+import { getEvent, joinEvent } from '../../store/event';
 import AttendeeCard from './AttendeeCard';
 import GroupCard from '../UserProfile/GroupCard'
 import './EventPage.css';
@@ -20,7 +20,7 @@ function EventPage() {
     }, [eventId, dispatch]);
 
     let userInEvent = false;
-    if (storeEvent) {
+    if (storeEvent && user) {
         for (let i = 0; i < storeEvent.attendees.length; i++) {
             if (storeEvent.attendees[i].email === user.email) {
                 userInEvent = true;
@@ -28,12 +28,25 @@ function EventPage() {
         }
     }
 
+    let userInGroup = false;
+    if (storeEvent && user) {
+        for (let i = 0; i < user.groups.length; i++) {
+            if (user.groups[i] === storeEvent.group_id) {
+                userInGroup = true;
+            }
+        }
+    }
+
     const attendEvent = async (e) => {
-        console.log("CLICKED ATTEND")
+        if (userInGroup) {
+            dispatch(joinEvent(user.id, storeEvent.id))
+        } else {
+            alert('Please join this group before registering for the event')
+        }
     };
 
     const leaveEvent = async (e) => {
-        console.log("CLICKED LEAVE")
+        dispatch(joinEvent(user.id, storeEvent.id))
     };
 
     return (

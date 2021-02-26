@@ -19,11 +19,23 @@ export const getEvent = (id) => async (dispatch) => {
 
   if(res.ok) {
     const jsonData = await res.json()
-    console.log("RESPONSE", jsonData)
+    // console.log("RESPONSE", jsonData)
     dispatch(setEvent(jsonData));
   }
 
 };
+
+export const joinEvent = (userId, eventId) => async (dispatch) => {
+  const res = await fetch(`/api/events/${eventId}`, {
+    method:'POST',
+    body: JSON.stringify({userId, eventId})
+  })
+
+  if (res.ok) {
+    const jsonData = await res.json()
+    dispatch(setEvent(jsonData));
+  }
+}
 
 const initialState = null;
 

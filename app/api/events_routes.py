@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Event, Tag
+from app.models import db, Event, Tag, User
 from sqlalchemy import asc, desc, and_
 from sqlalchemy.orm import joinedload
 from datetime import datetime, timedelta
@@ -48,5 +48,18 @@ def event(id):
     return event.to_dict()
 
 
+@events_routes.route('/<int:id>', methods=['POST'])
+def attend_event(id):
+    data = json.loads(request.data)
+    (userId, eventId) = (data['userId'], data['eventId'])
+    user = User.query.get(userId)
+    event = Event.query.get(eventId)
+    print(event.users)
+    if user not in event.users:
+        event.users.append(user)
+    else:
+        event.users.remove(user)
+    db.session.commit()
+    return event.to_dict()
+
 # TO DO: POST /api/events/new
-# TO DO: POST /api/events/:id
