@@ -28,7 +28,20 @@ class Group(db.Model):
             "description": self.description,
             "location": self.location,
             "is_private": self.is_private,
-            "owner_name": self.owner.first_name,
             "image_url": self.image_url,
-            "events": [event.to_dict_for_a_group() for event in self.events]
+            "events": [event.to_dict_for_a_group() for event in self.events], 
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "owner": self.owner.to_dict(),
+            "members": [member.to_dict() for member in self.users],
+        }
+
+    def to_dict_events(self):
+        return {
+          "id": self.id,
+          "name": self.name,
+          "description": self.description,
+          "location": self.location,
+          "image_url": self.image_url,
+          "is_private": self.is_private,
         }

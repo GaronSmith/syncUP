@@ -6,10 +6,12 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import UserProfile from "./components/UserProfile"
 import User from "./components/User";
+import EventPage from "./components/EventPage"
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
 import GroupPage from "./components/GroupPage";
+import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 
 function App() {
@@ -33,8 +35,10 @@ function App() {
   }
 
   return (
+    <>
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} authenticated ={authenticated} />
+      <div className='content'>
       <Switch>
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
@@ -49,6 +53,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
+        <ProtectedRoute path="/event/:eventId" exact={true} authenticated={authenticated}>
+          <EventPage />
+        </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <LandingPage />
         </ProtectedRoute>
@@ -56,7 +63,10 @@ function App() {
           <GroupPage />
         </Route>
       </Switch>
+    </div>
     </BrowserRouter>
+    <Footer />
+    </>
   );
 }
 

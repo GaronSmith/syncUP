@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Event
+from app.models import Event, Tag
 from sqlalchemy import asc, desc, and_
 from sqlalchemy.orm import joinedload
 from datetime import datetime, timedelta
@@ -23,12 +23,30 @@ def events():
         end_date = start_date + timedelta(weeks=500)
         events = Event.query.options(joinedload(Event.group)).order_by(
             asc(Event.date)).filter(Event.name.like(f'%{val}%')).\
-                filter(and_(Event.date >= start_date, Event.date <= end_date))
+            filter(and_(Event.date >= start_date, Event.date <= end_date))
         return {"events": [event.to_dict() for event in events]}
     else:
-        events =Event.query.options(joinedload(Event.group)).order_by(
+        events = Event.query.options(joinedload(Event.group)).order_by(
             asc(Event.date)).filter(Event.name.like(f'%{val}%')).\
                                     filter(and_(Event.date >= start_date,
                                                 Event.date <= end_date))
         return {"events": [event.to_dict() for event in events]}
 
+
+@events_routes.route('/tags', methods=['POST'])
+def event_tags():
+    data = json.loads(request.data)
+    val = data['val']
+    tags = Tag.query.order_by(asc(Tag.name)).filter(Tag.name.like(f'%{val}%')).limit(25)
+
+    return {"tags": [tag.to_dict() for tag in tags]}
+
+
+@events_routes.route('/<int:id>', methods=['GET'])
+def event(id):
+    event = Event.query.get(id)
+    return event.to_dict()
+
+
+# TO DO: POST /api/events/new
+# TO DO: POST /api/events/:id
