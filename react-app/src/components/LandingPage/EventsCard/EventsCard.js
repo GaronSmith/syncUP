@@ -9,7 +9,7 @@ const EventsCard = ({event}) => {
                 <img className='events__image' src={event.image_url}/>
             </div>
             <div className="events-card__middle">
-                <Link className='event-card__group' to={`/groups/${event.group_id}`}>{event.group}</Link>
+                <Link className='event-card__group' to={`/groups/${event.group_id}`}>{event.group_name}</Link>
                 <Link className='event-card__title' to={`/event/${event.id}`}>{event.name}</Link>
                 <h5 className= 'event-card__details'>{event.details}</h5>
             </div>
