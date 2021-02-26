@@ -5,6 +5,12 @@
 }
 
 .group__photo{
+    display: flex;
+    justify-content: center;
+    border: 2px, solid;
+    width:400px;
+    height: 300px;
+    overflow: hidden;
     margin-top: 3rem;
     margin-right: 4rem;
     border-radius: 15px;

@@ -20,6 +20,17 @@
     justify-content: center;
     border: 2px, solid;
     margin-top: 3rem;
+    margin-right: 1rem;
+    width:200px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.event__pic img{
+    object-fit: contain;
+    overflow: hidden;
+    width: 180px;
+    height: 140px;
 }
 
 .event__info{
@@ -28,11 +39,12 @@
     justify-content: center;
     align-items: center;
     height: 100px;
+    margin-right: 1rem;
 }
 
 .event__time{
     display: flex;;
-    font-size: large;
+    font-size: medium;
     align-items: flex-end;
     height: 100%;
 }

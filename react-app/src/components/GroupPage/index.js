@@ -7,9 +7,10 @@ import EventCard from '../EventCard/index'
 
 const GroupPage = ()=> {
     const sessionUser = useSelector(state => state.session.user)
+    const group = useSelector(state => state.group.group)
+
     const { groupId } = useParams()
     
-    const group = useSelector(state => state.group.group)
     const dispatch = useDispatch()
 
     console.log('session user', sessionUser)
@@ -27,7 +28,7 @@ const GroupPage = ()=> {
             <div className='group__container'>
                 <div className='group__title'>
                     <div className='group__photo'>
-                        <h1>Image</h1>
+                        <img src={group.image_url}></img>
                     </div>
                     <div className='group__info'>
                         <h1>{group.name}</h1>
@@ -51,7 +52,7 @@ const GroupPage = ()=> {
                         <h2>Events</h2>
                     </div>
 
-                    <EventCard />
+                    <EventCard group={group} />
                 </div>
 
             </div>

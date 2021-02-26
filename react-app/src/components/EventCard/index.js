@@ -1,36 +1,44 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { getOne } from '../../store/groups'
+import groupReducer, { getOne } from '../../store/groups'
 import { NavLink, useParams } from 'react-router-dom';
 import "./EventCard.css"
+import searchEvents from '../../store/events'
 
 const EventCard = () => {
     const sessionUser = useSelector(state => state.session.user)
+    const group = useSelector(state => state.group.group)
     const dispatch = useDispatch()
-
 
 
     return (
         sessionUser &&
         <>
-            <div className='event__container'>
-                <div className='event__pic'>
-                    <h1>Event Image</h1>
-                </div>
-                
-                <div className='event__info'>
-                    <h3>Event name</h3>
-                    <p>Host: </p>
-                    <p>Event Details:</p>
-                    <p>Spots remaining:</p>
-                </div>
+           {
+               group.events &&
+               group.events.sort((a, b) => new Date(a.date) - new Date(b.date)).map( event => {
+                    return (
+                        <div className='event__container' id={event.name}>
+                            <div className='event__pic'>
+                                <img src={event.image_url}></img>
+                            </div>
 
-                <div className='event__time'>
-                    <div className='time__div'>
-                        <h2>8:00 p.m.</h2>
-                    </div>
-                </div>
-            </div>
+                            <div className='event__info'>
+                                <h3>{event.name}</h3>
+                                <p>{event.location} </p>
+                                <p>{event.details}</p>
+                                <p>Spots left: {event.capacity - event.rsvps}</p>
+                            </div>
+
+                            <div className='event__time'>
+                                <div className='time__div'>
+                                    <h2>{event.date}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+           } 
         </>
     )
 }

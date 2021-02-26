@@ -43,3 +43,15 @@ class Event(db.Model):
             "group": self.group.name,
             "rsvps": len(self.users)
         }
+
+    def to_dict_for_a_group(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "details": self.details,
+            "location": self.location,
+            "rsvps": len(self.users),
+            "capacity": self.capacity,
+            "date": self.date,
+            "image_url": self.image_url
+        }
