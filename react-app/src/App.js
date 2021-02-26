@@ -9,6 +9,7 @@ import User from "./components/User";
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
+import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 
 function App() {
@@ -32,8 +33,10 @@ function App() {
   }
 
   return (
+    <>
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} authenticated ={authenticated} />
+      <div className='content'>
       <Switch>
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
@@ -52,7 +55,10 @@ function App() {
           <LandingPage />
         </ProtectedRoute>
       </Switch>
+    </div>
     </BrowserRouter>
+    <Footer />
+    </>
   );
 }
 
