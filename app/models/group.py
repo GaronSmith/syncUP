@@ -19,3 +19,27 @@ class Group(db.Model):
     owner = db.relationship('User')
     users = db.relationship(
       'User', secondary=group_members, back_populates='groups')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "location": self.location,
+            "image_url": self.image_url,
+            "is_private": self.is_private,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "owner": self.owner.to_dict(),
+            "members": [member.to_dict() for member in self.users],
+        }
+
+    def to_dict_events(self):
+        return {
+          "id": self.id,
+          "name": self.name,
+          "description": self.description,
+          "location": self.location,
+          "image_url": self.image_url,
+          "is_private": self.is_private,
+        }
