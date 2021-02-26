@@ -6,7 +6,7 @@ const EventsCard = ({event}) => {
     return (
         <div className="events-card__container">
             <div className="events-card__left">
-                <img className='events__image' src={event.image_url}/>
+                <img className='events__image' src={event.image_url} alt='tobad'/>
             </div>
             <div className="events-card__middle">
                 <Link className='event-card__group' to={`/groups/${event.group_id}`}>{event.group_name}</Link>

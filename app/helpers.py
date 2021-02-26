@@ -17,7 +17,7 @@ try:
 except Exception as e:
     print(f"S3 ERROR: {e}")
 
-S3_BUCKET = "syncupgs"
+S3_BUCKET = "syncup-project"
 
 try:
     S3_BUCKET_SERVER = s3.get_bucket_location(Bucket=S3_BUCKET)[
