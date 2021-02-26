@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { removeEvents, searchEvents } from '../../../store/events';
 import './SearchForm.css'
-import { searchTags } from '../../../store/tags';
+import { removeTags, searchTags } from '../../../store/tags';
 
 const SearchForm = () => {
     const dispatch = useDispatch()
-    const [searchValue, setSearchValue] = useState('e');
+    const [searchValue, setSearchValue] = useState('');
     const [searchMyGroups, setSearchMyGroups] = useState(false)
     const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
     const [endDate, setEndDate] = useState(new Date(2050, 1).toISOString().split('T')[0])
@@ -17,8 +17,8 @@ const SearchForm = () => {
     const user = useSelector(state => state.session.user)
 
     useEffect(() => {
-        console.log('effect', searchValue)
         dispatch(removeEvents())
+        dispatch(removeTags())
         if(searchValue){
             dispatch(searchEvents(searchValue, searchMyGroups, user.groups, startDate, endDate))
             dispatch(searchTags(searchValue))

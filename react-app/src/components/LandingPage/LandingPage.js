@@ -48,11 +48,7 @@ const LandingPage = () => {
                 </div>
                 <div className='results__tags'>
                     <h3 className='tags__title'>Tags</h3>
-                    {/* {searchTags && Object.values(searchTags).map(el => {
-                        console.log(el.name)
-                        return <TagButton key={el.id} tag={el} />
-                    })} */}
-                    {tags && tags.map((row, idx) => {
+                    {searchTags && tags && tags.map((row, idx) => {
                         return <div className='tag__row' key={idx}>
                             {row.map(tag => <TagButton key={tag.id} tag={tag} />)}
                         </div>

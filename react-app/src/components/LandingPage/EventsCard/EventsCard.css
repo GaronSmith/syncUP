@@ -56,3 +56,11 @@
   flex-direction: column;
   transition: all .2s ease-in-out;
 }
+
+.events-card__right{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: flex-end;
+  height: 150px;
+}
