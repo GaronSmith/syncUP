@@ -5,10 +5,12 @@ import DateCard from './DateCard/DateCard'
 
 import './LandingPage.css'
 import SearchForm from './SearchForm'
+import TagButton from './TagButton'
 
 const LandingPage = () => {
 
     const searchEvents = useSelector(state => state.events.search_results)
+    const searchTags = useSelector(state => state.tags.tagResults)
     const [uniqueDates, setUniqueDates] = useState(new Array());
 
     useEffect(() => {
@@ -40,7 +42,10 @@ const LandingPage = () => {
                 </div>
                 <div className='results__tags'>
                     <h3 className='tags__title'>Tags</h3>
-
+                    {searchTags && Object.values(searchTags).map(el => {
+                        console.log(el.name)
+                        return <TagButton key={el.id} tag={el} />
+                    })}
                 </div>
             </div>
         </div>

@@ -1,9 +1,16 @@
 const SET_TAGS = 'tags/setTags'
+const REMOVE_TAGS = 'tags/removeTags'
 
 const setTags = (tags) => {
     return {
         type: SET_TAGS,
         payload: tags
+    }
+}
+
+export const removeTags = () => {
+    return {
+        type: REMOVE_TAGS
     }
 }
 
@@ -31,6 +38,10 @@ const tagsReducer = (state=initialState, action) => {
         case SET_TAGS:
             newState = Object.assign({}, state);
             newState.tagResults = action.payload
+            return newState
+        case REMOVE_TAGS:
+            newState = Object.assign({}, state);
+            newState.tagResults = null
             return newState
         default:
             return state
