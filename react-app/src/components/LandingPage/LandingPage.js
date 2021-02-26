@@ -11,7 +11,8 @@ const LandingPage = () => {
 
     const searchEvents = useSelector(state => state.events.search_results)
     const searchTags = useSelector(state => state.tags.tagResults)
-    const [uniqueDates, setUniqueDates] = useState(new Array());
+    const [uniqueDates, setUniqueDates] = useState([]);
+    const [tags, setTags] = useState([])
 
     useEffect(() => {
         if(searchEvents){
@@ -19,8 +20,13 @@ const LandingPage = () => {
                 return searchEvents[eventId].date.split(' ').slice(0,4).join(' ')}
                 ))].sort((a,b) => new Date(a) - new Date(b)))
         }
-        console.log(searchEvents)
-    },[searchEvents])
+        if(searchTags){
+            const rows = [...Array(Math.ceil(Object.values(searchTags).length /2))];
+            const tagRows = rows.map((row, idx) => Object.values(searchTags).slice(idx * 2, idx * 2 + 2)); 
+            setTags(tagRows)
+        }
+    },[searchEvents, searchTags])
+
     
     return (
         <div className='landing__container'>
@@ -42,9 +48,14 @@ const LandingPage = () => {
                 </div>
                 <div className='results__tags'>
                     <h3 className='tags__title'>Tags</h3>
-                    {searchTags && Object.values(searchTags).map(el => {
+                    {/* {searchTags && Object.values(searchTags).map(el => {
                         console.log(el.name)
                         return <TagButton key={el.id} tag={el} />
+                    })} */}
+                    {tags && tags.map((row, idx) => {
+                        return <div className='tag__row' key={idx}>
+                            {row.map(tag => <TagButton key={tag.id} tag={tag} />)}
+                        </div>
                     })}
                 </div>
             </div>

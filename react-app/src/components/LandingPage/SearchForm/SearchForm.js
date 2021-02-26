@@ -9,7 +9,7 @@ import { searchTags } from '../../../store/tags';
 
 const SearchForm = () => {
     const dispatch = useDispatch()
-    const [searchValue, setSearchValue] = useState('');
+    const [searchValue, setSearchValue] = useState('e');
     const [searchMyGroups, setSearchMyGroups] = useState(false)
     const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0]);
     const [endDate, setEndDate] = useState(new Date(2050, 1).toISOString().split('T')[0])
@@ -17,7 +17,7 @@ const SearchForm = () => {
     const user = useSelector(state => state.session.user)
 
     useEffect(() => {
-        
+        console.log('effect', searchValue)
         dispatch(removeEvents())
         if(searchValue){
             dispatch(searchEvents(searchValue, searchMyGroups, user.groups, startDate, endDate))
