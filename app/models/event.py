@@ -44,4 +44,5 @@ class Event(db.Model):
             "rsvps": len(self.users),
             "owner": self.owner.to_dict(),
             "attendees": [user.to_dict() for user in self.users],
+            "group_name": self.group.name
         }
