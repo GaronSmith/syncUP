@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-        "name name name"
+        "name name attend"
         "image image info"
         "description description info"
         "attendees attendees attendees"
@@ -10,6 +10,13 @@
 
 .event__name {
     grid-area: name;
+}
+
+.event__button {
+    grid-area: attend;
+    margin: auto;
+    width: 10rem;
+    height: 2rem;
 }
 
 .event__image {
@@ -35,7 +42,6 @@
 .event__image img {
     object-fit: cover;
     width: 100%;
-    max-height: 30rem;
     border-radius: 0.5rem;
 }
 

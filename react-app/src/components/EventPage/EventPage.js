@@ -13,10 +13,28 @@ function EventPage() {
     const { eventId } = useParams();
     const dispatch = useDispatch();
     const storeEvent = useSelector(state => state.event);
+    const user = useSelector(state => state.session.user)
 
     useEffect(() => {
         dispatch(getEvent(eventId));
     }, [eventId, dispatch]);
+
+    let userInEvent = false;
+    if (storeEvent) {
+        for (let i = 0; i < storeEvent.attendees.length; i++) {
+            if (storeEvent.attendees[i].email === user.email) {
+                userInEvent = true;
+            }
+        }
+    }
+
+    const attendEvent = async (e) => {
+        console.log("CLICKED ATTEND")
+    };
+
+    const leaveEvent = async (e) => {
+        console.log("CLICKED LEAVE")
+    };
 
     return (
         <>
@@ -26,9 +44,16 @@ function EventPage() {
                         <div className='event__name'>
                             <h2>{storeEvent.name}</h2>
                         </div>
-                        <div className='event__image'>
-                            <img src={storeEvent.image_url} alt='event'></img>
-                        </div>
+                        {storeEvent.owner.id !== user.id &&
+                            userInEvent ?
+                                <button className='event__button' onClick={leaveEvent}>Leave</button> :
+                                <button className='event__button' onClick={attendEvent}>Attend</button>
+                        }
+                        {storeEvent.image_url && (
+                            <div className='event__image'>
+                                <img src={storeEvent.image_url} alt='event'></img>
+                            </div>
+                        )}
                         <div className='event__description'>
                             <h3>Description</h3>
                             <p>{storeEvent.details}</p>
