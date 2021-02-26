@@ -16,3 +16,9 @@ def groups():
 def group(id):
     group = Group.query.get(id)
     return group.to_dict()
+
+@group_routes.route('/<int:id>', methods=['POST'])
+@login_required
+def group(id):
+    group = Group.query.get(id)
+    return group.to_dict()

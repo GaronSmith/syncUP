@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import {getOne} from '../../store/groups'
+import {getOne, addMember} from '../../store/groups'
 import { NavLink, useParams } from 'react-router-dom';
 import "./GroupPage.css"
 import EventCard from '../EventCard/index'
@@ -34,6 +34,11 @@ const GroupPage = ()=> {
                         <h1>{group.name}</h1>
                         <h3>Created by {group.owner_name}</h3>
                         <h3>Located in {group.location}</h3>
+                        <div className='join__div'>
+                            <form action={`/api/groups/${groupId}`} method='POST'>
+                                <button onClick={dispatch(addMember(groupId, sessionUser))}> Join {group.name} </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
