@@ -13,9 +13,6 @@ events_routes = Blueprint('events', __name__)
 def events():
     data = json.loads(request.data)
     val = data['val']
-    events = Event.query.order_by(asc(Event.date)).filter(
-        Event.name.like(f'%{val}%'))
-    return {"events": [event.to_dict() for event in events]}
     start_date = data['start_date']
     end_date = data['end_date']
     if (not start_date and not end_date):
