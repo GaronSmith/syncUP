@@ -10,6 +10,7 @@ import EventPage from "./components/EventPage"
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
+import GroupPage from "./components/GroupPage";
 import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 
@@ -58,6 +59,9 @@ function App() {
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <LandingPage />
         </ProtectedRoute>
+        <Route path="/groups/:groupId" exact={true}>
+          <GroupPage />
+        </Route>
       </Switch>
     </div>
     </BrowserRouter>
