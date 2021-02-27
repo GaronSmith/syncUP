@@ -38,7 +38,7 @@ def new_group():
             owner_id=form.data['owner_id'],
             description=form.data['description'],
             location=form.data['location'],
-            image_url=url or '/img/userDefault.png',
+            image_url=url or 'https://syncup-project.s3.us-east-2.amazonaws.com/group-default.jpg',
             is_private=form.data['is_private'],
         )
 
