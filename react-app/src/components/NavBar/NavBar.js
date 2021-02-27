@@ -5,6 +5,7 @@ import SignUpFormModal from '../auth/SignUpForm';
 import EventFormModal from '../EventForm';
 import ProfileImage from './ProfileImage'
 import "./NavBar.css"
+import GroupFormModal from '../CreateGroupModal';
 
 const NavBar = ({ setAuthenticated, authenticated }) => {
   return (
@@ -29,6 +30,7 @@ const NavBar = ({ setAuthenticated, authenticated }) => {
             {authenticated &&
               <>
                 <EventFormModal setAuthenticated={setAuthenticated} authenticate={authenticated} />
+                <GroupFormModal setAuthenticated={setAuthenticated} authenticate={authenticated} />
                 <ProfileImage setAuthenticated={setAuthenticated}/>
               </>
             }

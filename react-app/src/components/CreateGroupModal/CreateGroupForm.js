@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import './CreateGroupForm.css'
+import { setUser } from "../../store/session";
 
 const CreateGroupForm = () => {
     const dispatch = useDispatch();
@@ -29,15 +30,15 @@ const CreateGroupForm = () => {
 
         if (imageFile) formData.append("imageFile", imageFile);
 
-        const response = await axios.post("/api/group/new", formData, {
+        const response = await axios.post("/api/groups/new", formData, {
             headers: {
                 "content-type": "multipart/form-data",
             },
-        });
+        }); 
 
         if (!response.errors) {
             dispatch(setUser(response.data));
-            history.push(`/event/${response.data.id}`);
+            history.push(`/group/${response.data.id}`);
         } else {
             setErrors(response.errors);
         }
@@ -112,6 +113,6 @@ const CreateGroupForm = () => {
         </>
     );
 };
-}
+
 
 export default CreateGroupForm

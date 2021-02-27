@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import Group, db
+from app.models import Group, db, User
 
-from app.forms import EventForm
+from app.forms.group_form import GroupForm
 from ..helpers import upload_file_to_s3
 group_routes = Blueprint('groups', __name__)
 
