@@ -39,7 +39,7 @@ const CreateGroupForm = ({setShowModal}) => {
         if (!response.errors) {
             dispatch(setUser(response.data));
             setShowModal(false)
-            history.push(`/group/${response.data.id}`);
+            history.push(`/groups/${response.data.id}`);
         } else {
             setErrors(response.errors);
         }
