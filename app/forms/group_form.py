@@ -12,7 +12,7 @@ def group_exists(form, field):
         raise ValidationError("Group Name is already registered.")
 
 
-class EventForm(FlaskForm):
+class GroupForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), event_exists])
     owner_id = StringField('owner_id', validators=[DataRequired()])
     description = StringField('description')
