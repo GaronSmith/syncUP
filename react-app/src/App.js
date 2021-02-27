@@ -47,7 +47,7 @@ function App() {
             <UsersList/>
           </ProtectedRoute>
           {/* TODO: Make /users/me protected. */}
-          <Route exact path="/users/me" authenticated={authenticated}>
+          <Route exact path="/users/:id" authenticated={authenticated}>
             <UserProfile/>
           </Route>
           <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>

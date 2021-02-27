@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ResetPasswordModal from './ResetPassword'
+import { useParams } from  'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-// import { getGroups } from '../../store/groups'
+import { getUser } from '../../store/user'
 import ProfileBox from './ProfileBox';
 import GroupCard from './GroupCard'
 import AdminRow from './AdminRow'
@@ -44,18 +45,24 @@ const demoUsers = [demoUser, demoUser2];
 
 function UserProfile() {
 
+  const { id } = useParams();
   const dispatch = useDispatch();
-  let user = useSelector(state => state.session.user) || demoUser;
-  let groups =  null;//useSelector(state => state.groups)
+  let sessionUser = useSelector(state => state.session.user)
+  let user = useSelector(state => state.user);
+  let groups = user.groups;
   // let ownedGroups = useSelector(state => state.groups.filter(group => group.owner_id === user.id));
   // let joinedGroups = useSelector(state => state.groups.filter(group => state.session.user.groups.includes(group.id)))
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    //dispatch(getGroups())
-  },[dispatch])
+    if(id === 'me') {
+      dispatch(getUser(sessionUser.id));
+    }
+    else
+      dispatch(getUser(id));
+  },[dispatch, sessionUser.id, id, user.id])
 
-  return (
+  return ( user && (
     <div className='profile'>
       <h2>User Profile</h2>
       <div className='profile_box flex'>
@@ -66,7 +73,7 @@ function UserProfile() {
           <p>Location <ProfileBox label='location' content={user.location}/></p>
           <p>Profile Picture <ProfileBox label='image_url' content={user.image_url} userFile={true}/></p>
           {/* TODO: Implement Change Password Button */}
-          <p><input type='button' value='Change Password' onClick={()=> setShowModal(true)}/></p>
+          {id === 'me' && <p><input type='button' value='Change Password' onClick={()=> setShowModal(true)}/></p> }
         </div>
         <div className='profile_user--right'>
           <div className='profile_picture' style={{ backgroundImage: `url(${user.image_url})`}}/>
@@ -75,32 +82,30 @@ function UserProfile() {
 
       <h2>My Groups</h2>
         <div className='profile_box groups'>
-          {groups?.filter(group => group.owner_id === user.id).map(group =>
+          {groups?.map(group =>
             <GroupCard group={group}/>
           )}
           <div className='spacer'/>
         </div>
-
-      <h2>Moderation Panel</h2>
-      <div className='profile_box'>
-        <div className='profile_box groups'>
-          {demoGroups?.map(group =>
-            <GroupCard group={group}/>
-          )}
-          <div className='spacer'/>
+      {id === 'me' && (
+        <>
+        <h2>Moderation Panel</h2>
+        <div className='profile_box'>
+          <div className='profile_box groups'>
+            {groups?.filter(group => group.owner.id === user.id).map( group => <GroupCard group={group} />)}
+            <div className='spacer'/>
+          </div>
         </div>
-      </div>
 
-      <h2>Administration Panel</h2>
-      <div className='profile_box'>
-        {demoUsers?.map(demo =>
-          <AdminRow user={demo}/>
-        )}
-      </div>
-
+        <h2>Administration Panel</h2>
+        <div className='profile_box'>
+            {demoUsers?.map(user => <AdminRow user={user}/>)}
+        </div>
+        </>
+      )}
       <ResetPasswordModal showModal={showModal} setShowModal={setShowModal} />
 
-    </div>
+    </div> )
   );
 };
 

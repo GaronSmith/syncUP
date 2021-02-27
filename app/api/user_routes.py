@@ -18,7 +18,7 @@ def users():
 @login_required
 def user(id):
     user = User.query.get(id)
-    return user.to_dict()
+    return user.to_profile_dict()
 
 
 @user_routes.route('/groups', methods=['POST'])
