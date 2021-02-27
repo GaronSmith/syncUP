@@ -16,6 +16,32 @@ class Group(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    owner = db.relationship('User')
+    owner = db.relationship('User', back_populates='owned_groups')
     users = db.relationship(
-      'User', secondary=group_members, back_populates='groups')
+        'User', secondary=group_members, back_populates='groups')
+    events = db.relationship('Event', back_populates='group')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "location": self.location,
+            "is_private": self.is_private,
+            "image_url": self.image_url,
+            "events": [event.to_dict_for_a_group() for event in self.events], 
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "owner": self.owner.to_dict(),
+            "members": [member.to_dict() for member in self.users],
+        }
+
+    def to_dict_events(self):
+        return {
+          "id": self.id,
+          "name": self.name,
+          "description": self.description,
+          "location": self.location,
+          "image_url": self.image_url,
+          "is_private": self.is_private,
+        }

@@ -1,7 +1,7 @@
 from flask import Blueprint, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from ..helpers import s3, upload_file_to_s3, allowed_file
-from app.models import User, db
+from app.models import User, Group, db, GroupQueue
 import json
 
 user_routes = Blueprint('users', __name__)
@@ -18,6 +18,39 @@ def users():
 @login_required
 def user(id):
     user = User.query.get(id)
+    return user.to_profile_dict()
+
+
+@user_routes.route('/groups', methods=['POST'])
+@login_required
+def add_new_group():
+    user = User.query.get(current_user.id)
+    data = json.loads(request.data)
+    id = data['id']
+    group = Group.query.get(id)
+    print("*********", id)
+
+    if group.is_private is False:
+        user.groups.append(group)
+        db.session.commit()
+
+        return user.to_dict()
+
+    return "Group is private"
+
+
+@user_routes.route('/groups', methods=['DELETE'])
+@login_required
+def remove_group():
+    user = User.query.get(current_user.id)
+    data = json.loads(request.data)
+    id = data['id']
+    group = Group.query.get(id)
+    print("*********", id)
+
+    user.groups.remove(group)
+    db.session.commit()
+
     return user.to_dict()
 
 
@@ -39,3 +72,12 @@ def update_user(id):
     db.session.commit()
 
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/groups', methods=['get'])
+@login_required
+def get_users_groups(id):
+    user = User.query.get(id)
+    owned_groups = [group.to_dict() for group in user.owned_groups]
+    joined_groups = [group.to_dict() for group in user.groups]
+    return {"groups": owned_groups.extend(joined_groups)}

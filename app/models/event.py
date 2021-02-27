@@ -40,6 +40,21 @@ class Event(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "capacity": self.capacity,
-            "group": self.group.name,
-            "rsvps": len(self.users)
+            "group": self.group.to_dict_events(),
+            "rsvps": len(self.users),
+            "owner": self.owner.to_dict(),
+            "attendees": [user.to_dict() for user in self.users],
+            "group_name": self.group.name
+        }
+
+    def to_dict_for_a_group(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "details": self.details,
+            "location": self.location,
+            "rsvps": len(self.users),
+            "capacity": self.capacity,
+            "date": self.date,
+            "image_url": self.image_url
         }
