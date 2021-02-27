@@ -10,6 +10,7 @@ import EventPage from "./components/EventPage"
 import { authenticate } from "./services/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/session";
+import GroupPage from "./components/GroupPage";
 import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 
@@ -38,28 +39,31 @@ function App() {
     <BrowserRouter>
       <NavBar setAuthenticated={setAuthenticated} authenticated ={authenticated} />
       <div className='content'>
-      <Switch>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-        </Route>
-        <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-          <UsersList/>
-        </ProtectedRoute>
-        {/* TODO: Make /users/me protected. */}
-        <Route exact path="/users/me" authenticated={authenticated}>
-          <UserProfile/>
-        </Route>
-        <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/event/:eventId" exact={true} authenticated={authenticated}>
-          <EventPage />
-        </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <LandingPage />
-        </ProtectedRoute>
-      </Switch>
-    </div>
+        <Switch>
+          <Route path="/sign-up" exact={true}>
+            <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+          </Route>
+          <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
+            <UsersList/>
+          </ProtectedRoute>
+          {/* TODO: Make /users/me protected. */}
+          <Route exact path="/users/me" authenticated={authenticated}>
+            <UserProfile/>
+          </Route>
+          <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
+            <User />
+          </ProtectedRoute>
+          <Route path="/event/:eventId" exact={true} authenticated={authenticated}>
+            <EventPage />
+          </Route>
+          <Route path="/" exact={true} authenticated={authenticated}>
+            <LandingPage />
+          </Route>
+          <Route path="/groups/:groupId" exact={true}>
+            <GroupPage />
+          </Route>
+        </Switch>
+      </div>
     </BrowserRouter>
     <Footer />
     </>

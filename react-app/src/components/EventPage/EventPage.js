@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons'
-import { getEvent } from '../../store/event';
+import { getEvent, joinEvent } from '../../store/event';
 import AttendeeCard from './AttendeeCard';
 import GroupCard from '../UserProfile/GroupCard'
 import './EventPage.css';
@@ -20,7 +20,7 @@ function EventPage() {
     }, [eventId, dispatch]);
 
     let userInEvent = false;
-    if (storeEvent) {
+    if (storeEvent && user) {
         for (let i = 0; i < storeEvent.attendees.length; i++) {
             if (storeEvent.attendees[i].email === user.email) {
                 userInEvent = true;
@@ -28,26 +28,43 @@ function EventPage() {
         }
     }
 
+    let userInGroup = false;
+    if (storeEvent && user && user.groups) {
+        for (let i = 0; i < user.groups.length; i++) {
+            if (user.groups[i] === storeEvent.group_id) {
+                userInGroup = true;
+            }
+        }
+    }
+
     const attendEvent = async (e) => {
-        console.log("CLICKED ATTEND")
+        if (userInGroup) {
+            dispatch(joinEvent(user.id, storeEvent.id))
+        } else {
+            alert('Please join this group before registering for the event')
+        }
     };
 
     const leaveEvent = async (e) => {
-        console.log("CLICKED LEAVE")
+        dispatch(joinEvent(user.id, storeEvent.id))
     };
 
     return (
         <>
             {storeEvent && (
                 <>
-                    <div className='event__container'>
+                    <div className='eventPage__container'>
                         <div className='event__name'>
                             <h2>{storeEvent.name}</h2>
                         </div>
-                        {storeEvent.owner.id !== user.id &&
-                            userInEvent ?
-                                <button className='event__button' onClick={leaveEvent}>Leave</button> :
-                                <button className='event__button' onClick={attendEvent}>Attend</button>
+                        {user && storeEvent.owner.id !== user.id && userInEvent &&
+                            <button className='event__button' onClick={leaveEvent}>Leave</button>
+                        }
+                        {!userInEvent &&
+                            <button className='event__button' onClick={attendEvent}>Attend</button>
+                        }
+                        {user && storeEvent.owner.id === user.id &&
+                            <button className='event__button' onClick={console.log("CLICK DELETE EVENT")}>Delete Event</button>
                         }
                         {storeEvent.image_url && (
                             <div className='event__image'>
@@ -80,7 +97,9 @@ function EventPage() {
                             </div>
                             <div>
                                 <h4>Group:</h4>
-                                <GroupCard group={storeEvent.group}/>
+                                <Link to={`/groups/${storeEvent.group.id}`}>
+                                    <GroupCard group={storeEvent.group}/>
+                                </Link>
                             </div>
                         </div>
                         <div className='event__attendees_container'>
