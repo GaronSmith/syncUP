@@ -22,7 +22,10 @@ class User(db.Model, UserMixin):
     groups = db.relationship(
         'Group', secondary=group_members, back_populates='users')
     events = db.relationship(
-      'Event', secondary=event_rsvps, back_populates='users')
+        'Event', secondary=event_rsvps, back_populates='users')
+    owned_groups = db.relationship(
+        'Group', back_populates='owner'
+    )
 
     @property
     def password(self):
@@ -44,4 +47,5 @@ class User(db.Model, UserMixin):
           "image_url": self.image_url,
           "location": self.location,
           "groups": [group.id for group in self.groups],
+          "owned_groups": [group.id for group in self.owned_groups]
       }

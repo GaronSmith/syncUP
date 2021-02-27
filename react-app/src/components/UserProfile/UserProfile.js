@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ResetPasswordModal from './ResetPassword'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// import { getGroups } from '../../store/groups'
 import ProfileBox from './ProfileBox';
 import GroupCard from './GroupCard'
+import AdminRow from './AdminRow'
 import './UserProfile.css';
 
 const demoUser = {
   first_name: "Demo-Lition",
   last_name: "Dave",
   email: "demodave@hopscotch.io",
+  location: "Sacremento, CA",
+  image_url: "https://demo.wpjobster.com/wp-content/uploads/2015/05/demo.jpg"
+};
+
+const demoUser2 = {
+  first_name: "Demo-graphics",
+  last_name: "Don",
+  email: "bob@hopscotch.io",
   location: "Sacremento, CA",
   image_url: "https://demo.wpjobster.com/wp-content/uploads/2015/05/demo.jpg"
 };
@@ -29,10 +39,22 @@ const demoGroup2 = {
   is_private: true,
 }
 
+const demoGroups = [demoGroup, demoGroup2];
+const demoUsers = [demoUser, demoUser2];
+
 function UserProfile() {
 
+  const dispatch = useDispatch();
   let user = useSelector(state => state.session.user) || demoUser;
+  let groups =  null;//useSelector(state => state.groups)
+  // let ownedGroups = useSelector(state => state.groups.filter(group => group.owner_id === user.id));
+  // let joinedGroups = useSelector(state => state.groups.filter(group => state.session.user.groups.includes(group.id)))
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    //dispatch(getGroups())
+  },[dispatch])
+
   return (
     <div className='profile'>
       <h2>User Profile</h2>
@@ -51,25 +73,29 @@ function UserProfile() {
         </div>
       </div>
 
-      <h2>Groups</h2>
+      <h2>My Groups</h2>
         <div className='profile_box groups'>
-          <GroupCard group={demoGroup}/>
-          <GroupCard group={demoGroup2}/>
-          <GroupCard group={demoGroup}/>
-          <GroupCard group={demoGroup2}/>
-          <GroupCard group={demoGroup}/>
-          <GroupCard group={demoGroup2}/>
-          <GroupCard group={demoGroup}/>
-          <GroupCard group={demoGroup2}/>
+          {groups?.filter(group => group.owner_id === user.id).map(group =>
+            <GroupCard group={group}/>
+          )}
           <div className='spacer'/>
         </div>
 
+      <h2>Moderation Panel</h2>
       <div className='profile_box'>
-        <h2>Moderation Panel</h2>
+        <div className='profile_box groups'>
+          {demoGroups?.map(group =>
+            <GroupCard group={group}/>
+          )}
+          <div className='spacer'/>
+        </div>
       </div>
 
+      <h2>Administration Panel</h2>
       <div className='profile_box'>
-        <h2>Administration Panel</h2>
+        {demoUsers?.map(demo =>
+          <AdminRow user={demo}/>
+        )}
       </div>
 
       <ResetPasswordModal showModal={showModal} setShowModal={setShowModal} />

@@ -1,7 +1,7 @@
 from flask import Blueprint, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from ..helpers import s3, upload_file_to_s3, allowed_file
-from app.models import User, db
+from app.models import GroupQueue, User, db
 import json
 
 user_routes = Blueprint('users', __name__)
@@ -39,3 +39,12 @@ def update_user(id):
     db.session.commit()
 
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/groups', methods=['get'])
+@login_required
+def get_users_groups(id):
+    user = User.query.get(id)
+    owned_groups = [group.to_dict() for group in user.owned_groups]
+    joined_groups = [group.to_dict() for group in user.groups]
+    return {"groups": owned_groups.extend(joined_groups)}

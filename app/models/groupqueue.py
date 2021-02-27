@@ -12,3 +12,10 @@ class GroupQueue(db.Model):
 
     user = db.relationship('User')
     group = db.relationship('Group')
+
+    def to_dict(self):
+        return {
+          "id": self.id,
+          "user_id": self.user_id,
+          "group_id": self.group_id,
+        }

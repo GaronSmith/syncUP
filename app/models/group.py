@@ -16,7 +16,7 @@ class Group(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    owner = db.relationship('User')
+    owner = db.relationship('User', back_populates='owned_groups')
     users = db.relationship(
       'User', secondary=group_members, back_populates='groups')
 
