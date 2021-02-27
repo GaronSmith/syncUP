@@ -58,3 +58,12 @@ button:hover{
   width: 100%;
   min-height: calc(100vh - 100px);
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited a:link{
+  color: black;
+}
