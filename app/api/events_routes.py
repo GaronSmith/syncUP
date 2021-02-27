@@ -96,7 +96,7 @@ def new_event():
             group_id=form.data['group_id'],
             details=form.data['details'],
             location=form.data['location'],
-            image_url=url or '/img/userDefault.png',
+            image_url=url or 'https://syncup-project.s3.us-east-2.amazonaws.com/event-default.jpg',
             date=form.data['date'],
             capacity=form.data['capacity'],
         )
