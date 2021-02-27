@@ -53,7 +53,7 @@ function EventPage() {
         <>
             {storeEvent && (
                 <>
-                    <div className='event__container'>
+                    <div className='eventPage__container'>
                         <div className='event__name'>
                             <h2>{storeEvent.name}</h2>
                         </div>
