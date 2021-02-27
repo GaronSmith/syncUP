@@ -47,6 +47,7 @@ class User(db.Model, UserMixin):
             "image_url": self.image_url,
             "location": self.location,
             "groups": [group.id for group in self.groups],
-            "groups_names": [{"id": group.id, "name": group.name} for group in self.groups],
+            "groups_names": [{"id": group.id, "name": group.name} for group
+                             in self.groups],
             "owned_groups": [group.id for group in self.owned_groups]
         }

@@ -30,7 +30,7 @@ def add_new_group():
     group = Group.query.get(id)
     print("*********", id)
 
-    if group.is_private == False:
+    if group.is_private is False:
         user.groups.append(group)
         db.session.commit()
 
