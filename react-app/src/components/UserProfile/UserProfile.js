@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ResetPasswordModal from './ResetPassword'
-import { useSelector } from 'react-redux';
+import { useParams } from  'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../store/user'
 import ProfileBox from './ProfileBox';
 import GroupCard from './GroupCard'
+import AdminRow from './AdminRow'
 import './UserProfile.css';
 
 const demoUser = {
   first_name: "Demo-Lition",
   last_name: "Dave",
   email: "demodave@hopscotch.io",
+  location: "Sacremento, CA",
+  image_url: "https://demo.wpjobster.com/wp-content/uploads/2015/05/demo.jpg"
+};
+
+const demoUser2 = {
+  first_name: "Demo-graphics",
+  last_name: "Don",
+  email: "bob@hopscotch.io",
   location: "Sacremento, CA",
   image_url: "https://demo.wpjobster.com/wp-content/uploads/2015/05/demo.jpg"
 };
@@ -29,11 +40,29 @@ const demoGroup2 = {
   is_private: true,
 }
 
+const demoGroups = [demoGroup, demoGroup2];
+const demoUsers = [demoUser, demoUser2];
+
 function UserProfile() {
 
-  let user = useSelector(state => state.session.user) || demoUser;
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  let sessionUser = useSelector(state => state.session.user)
+  let user = useSelector(state => state.user);
+  let groups = user.groups;
+  // let ownedGroups = useSelector(state => state.groups.filter(group => group.owner_id === user.id));
+  // let joinedGroups = useSelector(state => state.groups.filter(group => state.session.user.groups.includes(group.id)))
   const [showModal, setShowModal] = useState(false);
-  return (
+
+  useEffect(() => {
+    if(id === 'me') {
+      dispatch(getUser(sessionUser.id));
+    }
+    else
+      dispatch(getUser(id));
+  },[dispatch, sessionUser.id, id, user.id])
+
+  return ( user && (
     <div className='profile'>
       <h2>User Profile</h2>
       <div className='profile_box flex'>
@@ -44,37 +73,39 @@ function UserProfile() {
           <p>Location <ProfileBox label='location' content={user.location}/></p>
           <p>Profile Picture <ProfileBox label='image_url' content={user.image_url} userFile={true}/></p>
           {/* TODO: Implement Change Password Button */}
-          <p><input type='button' value='Change Password' onClick={()=> setShowModal(true)}/></p>
+          {id === 'me' && <p><input type='button' value='Change Password' onClick={()=> setShowModal(true)}/></p> }
         </div>
         <div className='profile_user--right'>
           <div className='profile_picture' style={{ backgroundImage: `url(${user.image_url})`}}/>
         </div>
       </div>
 
-      <h2>Groups</h2>
+      <h2>My Groups</h2>
         <div className='profile_box groups'>
-          <GroupCard group={demoGroup}/>
-          <GroupCard group={demoGroup2}/>
-          <GroupCard group={demoGroup}/>
-          <GroupCard group={demoGroup2}/>
-          <GroupCard group={demoGroup}/>
-          <GroupCard group={demoGroup2}/>
-          <GroupCard group={demoGroup}/>
-          <GroupCard group={demoGroup2}/>
+          {groups?.map(group =>
+            <GroupCard group={group}/>
+          )}
           <div className='spacer'/>
         </div>
-
-      <div className='profile_box'>
+      {id === 'me' && (
+        <>
         <h2>Moderation Panel</h2>
-      </div>
+        <div className='profile_box'>
+          <div className='profile_box groups'>
+            {groups?.filter(group => group.owner.id === user.id).map( group => <GroupCard group={group} />)}
+            <div className='spacer'/>
+          </div>
+        </div>
 
-      <div className='profile_box'>
         <h2>Administration Panel</h2>
-      </div>
-
+        <div className='profile_box'>
+            {demoUsers?.map(user => <AdminRow user={user}/>)}
+        </div>
+        </>
+      )}
       <ResetPasswordModal showModal={showModal} setShowModal={setShowModal} />
 
-    </div>
+    </div> )
   );
 };
 
