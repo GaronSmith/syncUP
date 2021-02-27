@@ -5,7 +5,7 @@ import axios from 'axios';
 import { setUser } from "../../store/session"
 import './EventForm.css';
 
-const EventForm = ({authenticated, setAuthenticated}) => {
+const EventForm = ({setShowModal, authenticated, setAuthenticated}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.session.user)
@@ -38,7 +38,7 @@ const EventForm = ({authenticated, setAuthenticated}) => {
     });
 
     if (!response.errors) {
-      dispatch(setUser(response.data));
+      setShowModal(false);
       history.push(`/event/${response.data.id}`);
     } else {
       setErrors(response.errors);

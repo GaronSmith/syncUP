@@ -19,11 +19,11 @@ const SearchForm = () => {
     useEffect(() => {
         dispatch(removeEvents())
         dispatch(removeTags())
-        if(searchValue){
+        // if(searchValue){
             dispatch(searchEvents(searchValue, searchMyGroups, user.groups, startDate, endDate))
             dispatch(searchTags(searchValue))
-        }
-        
+        // }
+
     },[searchValue, searchMyGroups, user, startDate, endDate, dispatch])
     return (
         <div className= 'search__container'>

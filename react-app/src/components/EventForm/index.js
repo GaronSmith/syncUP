@@ -12,7 +12,7 @@ function EventFormModal({setAuthenticated, authenticated}) {
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <EventForm setAuthenticated={setAuthenticated} authenticated={authenticated}/>
+                    <EventForm setShowModal={setShowModal} setAuthenticated={setAuthenticated} authenticated={authenticated}/>
                 </Modal>
             )}
         </>
