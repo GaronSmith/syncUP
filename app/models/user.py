@@ -23,6 +23,9 @@ class User(db.Model, UserMixin):
         'Group', secondary=group_members, back_populates='users')
     events = db.relationship(
         'Event', secondary=event_rsvps, back_populates='users')
+    owned_groups = db.relationship(
+        'Group', back_populates='owner'
+    )
 
     @property
     def password(self):
@@ -44,5 +47,18 @@ class User(db.Model, UserMixin):
             "image_url": self.image_url,
             "location": self.location,
             "groups": [group.id for group in self.groups],
-            "groups_names": [{"id": group.id, "name": group.name} for group in self.groups],
+            "groups_names": [{"id": group.id, "name": group.name} for group
+                             in self.groups],
+            "owned_groups": [group.id for group in self.owned_groups]
+        }
+
+    def to_profile_dict(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "image_url": self.image_url,
+            "location": self.location,
+            "groups": [group.to_dict() for group in self.groups]
         }

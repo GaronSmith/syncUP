@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
 import { editUser, uploadUserImage } from '../../store/user'
 
 function ProfileBox({label, content, userFile}) {
   let [buttonText, setButtonText] = useState('Edit');
-  let [value, setValue] = useState(content||'');
+  let [value, setValue] = useState(content);
   let [formDisabled, setFormDisabled] = useState(true);
   let [imageFile, setImageFile] = useState(null)
-  let user = useSelector(state => state.session.user)
+  let user = useSelector(state => state.user)
+  const { id } = useParams();
   const dispatch = useDispatch();
   const initialValue = content;
+
+  useEffect(() => {
+    setValue(content)
+  }, [content])
 
   const buttonClick = () => {
     const imgButton = document.getElementById('imageButton');
@@ -63,13 +69,15 @@ function ProfileBox({label, content, userFile}) {
     </>
     );
   };
-
   return (
     <>
       <input type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
+      { id === 'me' &&
+      <>
       <span> </span>
       <input type='button' value={buttonText} onClick={buttonClick}/>
       {userFile && userFileButton()}
+      </>}
     </>
   );
 };

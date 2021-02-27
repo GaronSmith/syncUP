@@ -1,8 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 function GroupCard({group}) {
+  const history = useHistory();
   return (
-    <div className='profile_group-card'>
+    <div className='profile_group-card' onClick={() => history.push(`/groups/${group.id}`)}>
       <div className='profile_group-card--top'>
         <div className='profile_group-picture' style={{ backgroundImage: `url(${group.image_url})`}}/>
       </div>

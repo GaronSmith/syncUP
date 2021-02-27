@@ -118,3 +118,16 @@
   display: flex;
   flex-direction: column;
 }
+
+.admin-row__container {
+  background-color: rgba(119, 166, 247, 0.3);
+  padding: 2px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-row__controls {
+  display: flex;
+  justify-content: space-between;
+}
