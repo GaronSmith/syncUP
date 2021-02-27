@@ -2,6 +2,8 @@ import axios from 'axios';
 // Action Constants
 
 export const SET_OPTION = 'users/SET_OPTION'
+export const ADD_GROUP = '/users/ADD_GROUP'
+export const REMOVE_GROUP = '/users/REMOVE_GROUP'
 
 //Action Creators
 
@@ -43,6 +45,7 @@ export const uploadUserImage = (imageFile) => async () => {
   console.log(response.data)
   return response.data;
 }
+
 
 //Reducer
 

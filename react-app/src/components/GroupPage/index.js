@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import {getOne, addMember} from '../../store/groups'
+import {getOne} from '../../store/groups'
+import {addToGroup, removeFromGroup} from '../../store/session'
 import { NavLink, useParams } from 'react-router-dom';
 import "./GroupPage.css"
 import EventCard from '../EventCard/index'
@@ -9,18 +10,38 @@ const GroupPage = ()=> {
     const sessionUser = useSelector(state => state.session.user)
     const group = useSelector(state => state.group.group)
 
+    const [inGroup, setInGroup] = useState(false)
+
     const { groupId } = useParams()
     
     const dispatch = useDispatch()
 
-    console.log('session user', sessionUser)
-    console.log('group:', group)
-
     useEffect(() => {
         dispatch(getOne(groupId))
 
-    }, [dispatch, groupId])
+        if(sessionUser){
+            if (sessionUser.groups.indexOf(parseInt(groupId)) != -1) {
+                setInGroup(true)
 
+            }
+            else {
+                setInGroup(false)
+            }
+            console.log('USE_EFFECT', inGroup)
+        }
+        
+
+    }, [dispatch, sessionUser, groupId])
+
+    const joinGroup = ((e) => {
+        e.preventDefault()
+        dispatch(addToGroup(groupId))
+    })
+
+    const leaveGroup = ((e) => {
+        e.preventDefault()
+        dispatch(removeFromGroup(groupId))
+    })
 
     return (
         sessionUser && 
@@ -34,11 +55,19 @@ const GroupPage = ()=> {
                         <h1>{group.name}</h1>
                         <h3>Created by {group.owner_name}</h3>
                         <h3>Located in {group.location}</h3>
-                        <div className='join__div'>
-                            <form action={`/api/groups/${groupId}`} method='POST'>
-                                <button onClick={dispatch(addMember(groupId, sessionUser))}> Join {group.name} </button>
-                            </form>
-                        </div>
+                        {
+                            inGroup ? 
+                                <div className='leave__div'>
+                                    <form>
+                                        <button onClick={leaveGroup}> Leave {group.name} </button>
+                                    </form>
+                                </div> :
+                                <div className='join__div'>
+                                    <form>
+                                        <button onClick={joinGroup}> Join {group.name} </button>
+                                    </form>
+                                </div>
+                        }
                     </div>
                 </div>
 
@@ -63,8 +92,6 @@ const GroupPage = ()=> {
             </div>
         </>
     )
-    
-   
 }
 
 export default GroupPage;

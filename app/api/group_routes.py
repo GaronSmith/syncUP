@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import Group
+from flask_login import login_required, current_user
+from app.models import Group, db
 
 group_routes = Blueprint('groups', __name__)
 
@@ -12,12 +12,6 @@ def groups():
     return {"groups": [groups.to_dict() for group in groups]}
 
 @group_routes.route('/<int:id>')
-@login_required
-def group(id):
-    group = Group.query.get(id)
-    return group.to_dict()
-
-@group_routes.route('/<int:id>', methods=['POST'])
 @login_required
 def group(id):
     group = Group.query.get(id)
