@@ -6,7 +6,7 @@ import axios from 'axios';
 import './CreateGroupForm.css'
 import { setUser } from "../../store/session";
 
-const CreateGroupForm = () => {
+const CreateGroupForm = ({setShowModal}) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
@@ -38,6 +38,7 @@ const CreateGroupForm = () => {
 
         if (!response.errors) {
             dispatch(setUser(response.data));
+            setShowModal(false)
             history.push(`/group/${response.data.id}`);
         } else {
             setErrors(response.errors);

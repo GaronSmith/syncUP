@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Group, db, User
 
@@ -39,7 +39,7 @@ def new_group():
             description=form.data['description'],
             location=form.data['location'],
             image_url=url or '/img/userDefault.png',
-            isPrivate=form.data['isPrivate'],
+            is_private=form.data['is_private'],
         )
 
         db.session.add(group)

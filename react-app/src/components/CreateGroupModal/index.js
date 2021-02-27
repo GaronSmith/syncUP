@@ -12,7 +12,7 @@ function GroupFormModal({ setAuthenticated, authenticated }) {
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <CreateGroupForm setAuthenticated={setAuthenticated} authenticated={authenticated} />
+                    <CreateGroupForm setShowModal={setShowModal} setAuthenticated={setAuthenticated} authenticated={authenticated} />
                 </Modal>
             )}
         </>
