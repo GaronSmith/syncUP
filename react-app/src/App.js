@@ -55,9 +55,9 @@ function App() {
         <Route path="/event/:eventId" exact={true} authenticated={authenticated}>
           <EventPage />
         </Route>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
+        <Route path="/" exact={true} authenticated={authenticated}>
           <LandingPage />
-        </ProtectedRoute>
+        </Route>
       </Switch>
     </div>
     </BrowserRouter>
