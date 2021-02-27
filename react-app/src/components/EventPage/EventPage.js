@@ -29,7 +29,7 @@ function EventPage() {
     }
 
     let userInGroup = false;
-    if (storeEvent && user) {
+    if (storeEvent && user && user.groups) {
         for (let i = 0; i < user.groups.length; i++) {
             if (user.groups[i] === storeEvent.group_id) {
                 userInGroup = true;
@@ -57,10 +57,14 @@ function EventPage() {
                         <div className='event__name'>
                             <h2>{storeEvent.name}</h2>
                         </div>
-                        {storeEvent.owner.id !== user.id &&
-                            userInEvent ?
-                                <button className='event__button' onClick={leaveEvent}>Leave</button> :
-                                <button className='event__button' onClick={attendEvent}>Attend</button>
+                        {user && storeEvent.owner.id !== user.id && userInEvent &&
+                            <button className='event__button' onClick={leaveEvent}>Leave</button>
+                        }
+                        {!userInEvent &&
+                            <button className='event__button' onClick={attendEvent}>Attend</button>
+                        }
+                        {user && storeEvent.owner.id === user.id &&
+                            <button className='event__button' onClick={console.log("CLICK DELETE EVENT")}>Delete Event</button>
                         }
                         {storeEvent.image_url && (
                             <div className='event__image'>
@@ -93,7 +97,9 @@ function EventPage() {
                             </div>
                             <div>
                                 <h4>Group:</h4>
-                                <GroupCard group={storeEvent.group}/>
+                                <Link to={`/groups/${storeEvent.group.id}`}>
+                                    <GroupCard group={storeEvent.group}/>
+                                </Link>
                             </div>
                         </div>
                         <div className='event__attendees_container'>

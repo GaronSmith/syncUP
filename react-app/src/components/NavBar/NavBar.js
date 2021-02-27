@@ -2,8 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginFormModal from '../auth/LoginForm';
 import SignUpFormModal from '../auth/SignUpForm';
+import EventFormModal from '../EventForm';
 import ProfileImage from './ProfileImage'
 import "./NavBar.css"
+
 const NavBar = ({ setAuthenticated, authenticated }) => {
   return (
     <nav>
@@ -25,7 +27,10 @@ const NavBar = ({ setAuthenticated, authenticated }) => {
               </>
             }
             {authenticated &&
-              <ProfileImage setAuthenticated={setAuthenticated}/>
+              <>
+                <EventFormModal setAuthenticated={setAuthenticated} authenticate={authenticated} />
+                <ProfileImage setAuthenticated={setAuthenticated}/>
+              </>
             }
           </div>
 

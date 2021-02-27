@@ -52,9 +52,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/event/:eventId" exact={true} authenticated={authenticated}>
+        <Route path="/event/:eventId" exact={true} authenticated={authenticated}>
           <EventPage />
-        </ProtectedRoute>
+        </Route>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <LandingPage />
         </ProtectedRoute>
