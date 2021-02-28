@@ -23,7 +23,7 @@ export const searchEvents = (val, bool, groups, start_date, end_date) => async (
     if(response.ok){
         const events = await response.json()
         let obj = {}
-        if(bool){
+        if(bool && groups){
                 Object.keys(events.events).forEach(el => {
                     if (groups.indexOf(events.events[el].group_id) !== -1) {
                         obj[events.events[el].id] = events.events[el]

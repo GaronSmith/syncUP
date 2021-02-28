@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
 import { Modal } from '../../context/modal'
-import EventForm from './EventForm'
+import CreateGroupForm from './CreateGroupForm'
 
-function EventFormModal({setAuthenticated, authenticated}) {
+function GroupFormModal({ setAuthenticated, authenticated }) {
     const [showModal, setShowModal] = useState(false)
 
     return (
         <>
             <button className='navbar__button' onClick={() => setShowModal(true)}>
-                Create Event
+                Create Group
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <EventForm setShowModal={setShowModal} setAuthenticated={setAuthenticated} authenticated={authenticated}/>
+                    <CreateGroupForm setShowModal={setShowModal} setAuthenticated={setAuthenticated} authenticated={authenticated} />
                 </Modal>
             )}
         </>
     )
 }
 
-export default EventFormModal
+export default GroupFormModal

@@ -76,7 +76,7 @@ def sign_up():
             last_name=form.data['last_name'],
             email=form.data['email'],
             password=form.data['password'],
-            image_url=url or '/img/userDefault.png',
+            image_url=url or 'https://syncup-project.s3.us-east-2.amazonaws.com/user-default.png',
             location=form.data['location'],
         )
 

@@ -19,11 +19,12 @@ const SearchForm = () => {
     useEffect(() => {
         dispatch(removeEvents())
         dispatch(removeTags())
-        if(searchValue){
-            dispatch(searchEvents(searchValue, searchMyGroups, user.groups, startDate, endDate))
-            dispatch(searchTags(searchValue))
-        }
-        
+
+        const groups = user ? user.groups : null
+        dispatch(searchEvents(searchValue, searchMyGroups, groups, startDate, endDate))
+        dispatch(searchTags(searchValue))
+
+
     },[searchValue, searchMyGroups, user, startDate, endDate, dispatch])
     return (
         <div className= 'search__container'>
@@ -41,15 +42,18 @@ const SearchForm = () => {
                             onChange={(e) => setSearchValue(e.target.value)}
                         />
                     </div>
-                    <div className='search__input-container'>
-                        <label className="search__label">Search only my groups</label>
-                        <input
-                            type='checkbox'
-                            className='search__input'
-                            checked={Boolean(searchMyGroups)}
-                            onChange={(e) => setSearchMyGroups(!searchMyGroups)}
-                        />
-                    </div>
+                    {user &&
+                        <div className='search__input-container'>
+                            <label className="search__label">Search only my groups</label>
+                            <input
+                                type='checkbox'
+                                className='search__input'
+                                checked={Boolean(searchMyGroups)}
+                                onChange={(e) => setSearchMyGroups(!searchMyGroups)}
+                            />
+                        </div>
+                    }
+                    
                     <div className='search__input-container'>
                         <label className="search__label">Start Date</label>
                         <input

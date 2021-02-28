@@ -30,19 +30,19 @@ def events():
     end_date = data['end_date']
     if (not start_date and not end_date):
         events = Event.query.options(joinedload(Event.group)).\
-                order_by(asc(Event.date)).filter(Event.name.like(f'%{val}%'))
+                order_by(asc(Event.date)).filter(Event.name.like(f'%{val}%')).limit(20)
         return {"events": [event.to_dict() for event in events]}
     elif (start_date and not end_date):
         end_date = start_date + timedelta(weeks=500)
         events = Event.query.options(joinedload(Event.group)).order_by(
             asc(Event.date)).filter(Event.name.like(f'%{val}%')).\
-            filter(and_(Event.date >= start_date, Event.date <= end_date))
+            filter(and_(Event.date >= start_date, Event.date <= end_date)).limit(20)
         return {"events": [event.to_dict() for event in events]}
     else:
         events = Event.query.options(joinedload(Event.group)).order_by(
             asc(Event.date)).filter(Event.name.like(f'%{val}%')).\
                                     filter(and_(Event.date >= start_date,
-                                                Event.date <= end_date))
+                                                Event.date <= end_date)).limit(20)
         return {"events": [event.to_dict() for event in events]}
 
 
@@ -96,7 +96,7 @@ def new_event():
             group_id=form.data['group_id'],
             details=form.data['details'],
             location=form.data['location'],
-            image_url=url or '/img/userDefault.png',
+            image_url=url or 'https://syncup-project.s3.us-east-2.amazonaws.com/event-default.jpg',
             date=form.data['date'],
             capacity=form.data['capacity'],
         )
