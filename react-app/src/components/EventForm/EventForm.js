@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { setUser } from "../../store/session"
 import './EventForm.css';
 
 const EventForm = ({setShowModal, authenticated, setAuthenticated}) => {
-  const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.session.user)
   const [errors, setErrors] = useState([]);
