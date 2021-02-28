@@ -1,5 +1,6 @@
 .eventPage__container {
     display: grid;
+    margin: 0 2rem;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
         "name name attend"
@@ -53,7 +54,11 @@
 
 .event__information_container {
     grid-area: info;
-    padding: 0 1rem;
+    padding: 0 2rem;
+}
+
+.event__information_container p {
+    font-size: 1.2rem;
 }
 
 .event__attendees_container {
@@ -66,11 +71,11 @@
     justify-content: flex-start;
 }
 
-.profile_box {
+/* .profile_box {
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
     background-color: white;
     padding: 5px;
     margin: 2px;
     margin-top: 10px;
     border-radius: 10px;
-}
+} */

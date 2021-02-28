@@ -35,6 +35,12 @@ def add_new_group():
         db.session.commit()
 
         return user.to_dict()
+    
+    else:
+        waiting_user = GroupQueue(user_id=user.id, group_id=group.id)
+
+        db.session.add(waiting_user)
+        db.session.commit()
 
     return "Group is private"
 

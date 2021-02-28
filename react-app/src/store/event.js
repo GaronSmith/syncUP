@@ -19,7 +19,6 @@ export const getEvent = (id) => async (dispatch) => {
 
   if(res.ok) {
     const jsonData = await res.json()
-    // console.log("RESPONSE", jsonData)
     dispatch(setEvent(jsonData));
   }
 
