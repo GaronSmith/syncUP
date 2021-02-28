@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 const initialState = {group: {}}
 
 const GET_GROUPS = 'groups/getGroups'
@@ -24,7 +22,6 @@ export const getAll = () => async (dispatch) => {
     const res = await fetch('/api/groups/');
 
     if(res.ok) {
-        const groups = await res.json()
         dispatch(getGroups(res.data.groups))
     }
 }

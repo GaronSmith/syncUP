@@ -44,12 +44,15 @@ input[type=button]:hover {
 
 button {
   padding: 4px;
+  margin: 0.2rem;
   background-color: #F3F7FE;
   border: 2px #77A6F7 solid;
+  border-radius: 0.4rem;
 }
 
 button:hover{
   cursor: pointer;
+  background-color: #D3E3FC;
 }
 
 .content {
