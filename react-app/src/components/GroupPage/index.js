@@ -11,7 +11,6 @@ const GroupPage = ()=> {
     const group = useSelector(state => state.group.group)
 
     const [inGroup, setInGroup] = useState(false)
-
     const { groupId } = useParams()
     
     const dispatch = useDispatch()
@@ -56,17 +55,31 @@ const GroupPage = ()=> {
                         <h3>Created by {group.owner_name}</h3>
                         <h3>Located in {group.location}</h3>
                         {
-                            inGroup ? 
-                                <div className='leave__div'>
-                                    <form>
-                                        <button onClick={leaveGroup}> Leave {group.name} </button>
-                                    </form>
-                                </div> :
-                                <div className='join__div'>
-                                    <form>
-                                        <button onClick={joinGroup}> Join {group.name} </button>
-                                    </form>
-                                </div>
+                            // group.is_private ?
+                                // inGroup ?
+                                //     <div className='leave__div'>
+                                //         <form>
+                                //             <button onClick={leaveGroup}> Leave {group.name} </button>
+                                //         </form>
+                                //     </div> :
+                                //     <div className='request__div'>
+                                //         <form>
+                                //             <button disabled> Request sent to group owner!</button>
+                                //         </form>
+                                //     </div>
+                                // :
+
+                               inGroup ? 
+                                    <div className='leave__div'>
+                                        <form>
+                                            <button onClick={leaveGroup}> Leave {group.name} </button>
+                                        </form>
+                                    </div> :
+                                    <div className='join__div'>
+                                        <form>
+                                            <button onClick={joinGroup}> Join {group.name} </button>
+                                        </form>
+                                    </div> 
                         }
                     </div>
                 </div>
