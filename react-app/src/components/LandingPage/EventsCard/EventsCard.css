@@ -34,14 +34,14 @@
 .event-card__title{
     text-decoration: none;
     color: black;
-    font-size: 2rem;
+    font-size: 1rem;
     cursor: pointer;
 }
 
 .event-card__group{
     text-decoration: none;
     color: grey;
-    font-size: 1rem;
+    font-size: .7rem;
     cursor: pointer;
 }
 
