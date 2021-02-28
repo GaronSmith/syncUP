@@ -1,14 +1,14 @@
+from faker import Faker
+
 from app.models import db, Tag
+
+fake = Faker()
 
 
 def seed_tags():
-
-    demo = Tag(name='Demonstration')
-    demo2 = Tag(name='Demo')
-
-    db.session.add(demo)
-    db.session.add(demo2)
-
+    for i in range(50):
+        tag = Tag(name=fake.word())
+        db.session.add(tag)
     db.session.commit()
 
 
