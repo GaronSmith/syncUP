@@ -8,40 +8,7 @@ import GroupCard from './GroupCard'
 import AdminRow from './AdminRow'
 import './UserProfile.css';
 
-const demoUser = {
-  first_name: "Demo-Lition",
-  last_name: "Dave",
-  email: "demodave@hopscotch.io",
-  location: "Sacremento, CA",
-  image_url: "https://demo.wpjobster.com/wp-content/uploads/2015/05/demo.jpg"
-};
-
-const demoUser2 = {
-  first_name: "Demo-graphics",
-  last_name: "Don",
-  email: "bob@hopscotch.io",
-  location: "Sacremento, CA",
-  image_url: "https://demo.wpjobster.com/wp-content/uploads/2015/05/demo.jpg"
-};
-
-const demoGroup = {
-  name: 'Hopscotch United',
-  description: 'A group of people who really love hopping, skipping, and counting to 9.',
-  location: 'Moneyweather Elementry, Sacremento CA',
-  image_url: 'http://gamesweplayed.com/wp-content/uploads/2010/01/Hopscotch.jpg',
-  is_private: false,
-}
-
-const demoGroup2 = {
-  name: 'American Theater Troupe',
-  description: "Verilly, t'was I who killed the beast.",
-  location: 'Forberg University, Sacremento CA',
-  image_url: 'https://mrfrade11thgradeenglish.files.wordpress.com/2014/05/hamlet-skull-sm1.jpeg',
-  is_private: true,
-}
-
-const demoGroups = [demoGroup, demoGroup2];
-const demoUsers = [demoUser, demoUser2];
+const demoUsers = [{email: "bob@hopscotch.io",},{email: "demodave@hopscotch.io",}];
 
 function UserProfile() {
 
@@ -50,8 +17,6 @@ function UserProfile() {
   let sessionUser = useSelector(state => state.session.user)
   let user = useSelector(state => state.user);
   let groups = user.groups;
-  // let ownedGroups = useSelector(state => state.groups.filter(group => group.owner_id === user.id));
-  // let joinedGroups = useSelector(state => state.groups.filter(group => state.session.user.groups.includes(group.id)))
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -61,6 +26,8 @@ function UserProfile() {
     else
       dispatch(getUser(id));
   },[dispatch, sessionUser.id, id, user.id])
+
+  const imgURL = user?.image_url ? user.image_url : '/img/userDefault.png';
 
   return ( user && (
     <div className='profile'>
@@ -76,7 +43,7 @@ function UserProfile() {
           {id === 'me' && <p><input type='button' value='Change Password' onClick={()=> setShowModal(true)}/></p> }
         </div>
         <div className='profile_user--right'>
-          <div className='profile_picture' style={{ backgroundImage: `url(${user.image_url})`}}/>
+          <div className='profile_picture' style={{ backgroundImage: `url(${imgURL})`}}/>
         </div>
       </div>
 
@@ -90,11 +57,9 @@ function UserProfile() {
       {id === 'me' && (
         <>
         <h2>Moderation Panel</h2>
-        <div className='profile_box'>
           <div className='profile_box groups'>
             {groups?.filter(group => group.owner.id === user.id).map( group => <GroupCard group={group} />)}
             <div className='spacer'/>
-          </div>
         </div>
 
         <h2>Administration Panel</h2>
