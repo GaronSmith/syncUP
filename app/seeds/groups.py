@@ -17,14 +17,6 @@ GROUP_URLS = ["https://syncup-project.s3.us-east-2.amazonaws.com/seeder-group-a.
 
 
 def seed_groups():
-    owner = User.query.filter_by(email='demo@aa.io').first()
-    demo = Group(
-        name='Demo Group', description='A description fit for a demonstration',
-        is_private=False, owner_id=owner.id)
-
-    db.session.add(demo)
-
-    db.session.commit()
 
     for i in range(20):
         group = Group(
