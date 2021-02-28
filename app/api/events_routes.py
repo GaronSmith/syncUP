@@ -51,7 +51,7 @@ def event_tags():
     data = json.loads(request.data)
     val = data['val']
     tags = Tag.query.order_by(asc(Tag.name)).filter(
-        Tag.name.like(f'%{val}%')).limit(25)
+        Tag.name.like(f'%{val}%')).limit(18)
 
     return {"tags": [tag.to_dict() for tag in tags]}
 

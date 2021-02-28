@@ -8,7 +8,7 @@ class Event(db.Model):
     __tablename__ = 'events'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
+    name = db.Column(db.String(50), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('groups.id'),
                          nullable=False)
