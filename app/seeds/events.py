@@ -27,7 +27,8 @@ def seed_events():
             date=date.today() + timedelta(days=random.randrange(150, 190)),
             capacity=random.randrange(1, 50),
             group_id=random.randrange(1, 20),
-            tags=[tags_list[i % len(tags_list)]]
+            tags=[tags_list[i % len(tags_list)]],
+            location=', '.join([fake.city(), fake.state()])
         )
         db.session.add(event)
     db.session.commit()

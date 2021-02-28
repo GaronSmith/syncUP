@@ -38,7 +38,8 @@ def seed_users():
             password='password',
             first_name=fake.name().split()[0],
             last_name=fake.name().split()[1],
-            image_url=USERS_IMG[i % len(USERS_IMG)]
+            image_url=USERS_IMG[i % len(USERS_IMG)],
+            location=', '.join([fake.city(), fake.state()])
         )
         db.session.add(user)
         db.session.commit()
