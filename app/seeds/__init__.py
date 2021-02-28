@@ -1,6 +1,5 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
-from .tags import seed_tags, undo_tags
 from .groups import seed_groups, undo_groups
 from .events import seed_events, undo_events
 
