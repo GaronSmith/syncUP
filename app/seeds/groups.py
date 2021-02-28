@@ -30,7 +30,7 @@ def seed_groups():
         group = Group(
             name=fake.company(),
             description=fake.text(),
-            is_private=(bool(i % 2)),
+            is_private=False,
             owner_id=random.randrange(1,50),
             image_url=GROUP_URLS[i % len(GROUP_URLS)]
         )

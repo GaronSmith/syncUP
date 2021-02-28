@@ -34,8 +34,8 @@ def seed_users():
     db.session.commit()
     for i in range(50):
         user = User(
-            email=fake.email(),
-            password=fake.name(),
+            email=f"user{i}@email.com",
+            password='password',
             first_name=fake.name().split()[0],
             last_name=fake.name().split()[1],
             image_url=USERS_IMG[i % len(USERS_IMG)]
