@@ -42,7 +42,7 @@ const GroupPage = ()=> {
     })
 
     return (
-        sessionUser &&
+        sessionUser && group &&
         <>
             <div className='group__container'>
                 <div className='group__title'>
@@ -97,7 +97,6 @@ const GroupPage = ()=> {
                     <div>
                         <h2>Events</h2>
                     </div>
-
                     <EventCard group={group} />
                 </div>
 

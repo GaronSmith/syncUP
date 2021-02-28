@@ -30,12 +30,10 @@ function ProfileBox({label, content, userFile}) {
     } else {
       setFormDisabled(true);
       setButtonText('Edit');
-      console.log('Before the return')
       if(userFile) {
         imgButton.disabled = true;
       }
       if(value === initialValue) return;
-      console.log('Submitting')
       dispatch(editUser(user.id, label, value))
     }
   }
