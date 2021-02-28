@@ -30,7 +30,7 @@
     border: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
     border-radius: 15px;
-    height: 200px;
+    height: fit-content;
     padding: 10px;
     margin-top: 3rem;
 }
