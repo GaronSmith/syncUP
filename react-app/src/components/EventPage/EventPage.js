@@ -1,10 +1,10 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons'
-import { getEvent, joinEvent } from '../../store/event';
+import { getEvent, joinEvent, deleteEvent } from '../../store/event';
 import AttendeeCard from './AttendeeCard';
 import GroupCard from '../UserProfile/GroupCard'
 import './EventPage.css';
@@ -12,8 +12,9 @@ import './EventPage.css';
 function EventPage() {
     const { eventId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
     const storeEvent = useSelector(state => state.event);
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(getEvent(eventId));
@@ -46,7 +47,14 @@ function EventPage() {
     };
 
     const leaveEvent = async (e) => {
-        dispatch(joinEvent(user.id, storeEvent.id))
+        dispatch(joinEvent(user.id, storeEvent.id));
+    };
+
+    const onEventDelete = () => {
+        dispatch(deleteEvent(storeEvent.id));
+        setTimeout(() => {
+            history.push('/');
+        }, 1000);
     };
 
     return (
@@ -64,7 +72,7 @@ function EventPage() {
                             <button className='event__button' onClick={attendEvent}>Attend</button>
                         }
                         {user && storeEvent.owner.id === user.id &&
-                            <button className='event__button' onClick={console.log("CLICK DELETE EVENT")}>Delete Event</button>
+                            <button className='event__button' onClick={onEventDelete}>Delete Event</button>
                         }
                         {storeEvent.image_url && (
                             <div className='event__image'>

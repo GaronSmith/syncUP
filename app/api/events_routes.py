@@ -107,3 +107,11 @@ def new_event():
 
         return event.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@events_routes.route('/<int:id>', methods=['DELETE'])
+def delete_event(id):
+    event = Event.query.get(id)
+    db.session.delete(event)
+    db.session.commit()
+    return event.to_dict()
