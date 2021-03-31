@@ -2,18 +2,22 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    margin-bottom: 1rem;    
+    margin-bottom: 1rem;
     width: 750px;
     height: 150px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
     padding: 5px;
     margin-left: 5px;
     margin-right: 5px;
     transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+.events-card__container:hover{
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
-.events-card__left, 
-.events-card__right, 
+.events-card__left,
+.events-card__right,
 .events-card__middle{
     display: flex;
     flex-direction: column;
@@ -40,11 +44,18 @@
     cursor: pointer;
 }
 
+.event-card__title:hover{
+  text-decoration: underline;
+}
+
 .event-card__group{
     text-decoration: none;
     color: grey;
     font-size: .7rem;
     cursor: pointer;
+}
+.event-card__group:hover{
+  text-decoration: underline;
 }
 
 .profile_group-card {

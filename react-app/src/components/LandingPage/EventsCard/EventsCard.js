@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import "./EventsCard.css"
 
 const EventsCard = ({event}) => {
+    const history = useHistory();
     return (
-        <div className="events-card__container">
+        <div className="events-card__container" onClick={() =>history.push(`/groups/${event.group_id}`)}>
             <div className="events-card__left">
                 <img className='events__image' src={event.image_url} alt='tobad'/>
             </div>
