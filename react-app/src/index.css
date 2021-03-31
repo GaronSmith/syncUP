@@ -1,25 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Martel:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fanwood+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
 /* ---------------------------------------------- */
 /* Site-wide*/
 /* ---------------------------------------------- */
 
-h2, h3, h4, h5, h6 {
-  font-family: 'Fanwood Text', serif;
-}
-
 body {
   background-color: #F3F7FE;
-  font-family: 'Martel', serif;
+  font-family: 'Noto Sans', sans-serif;
   margin: 0;
 	padding: 0;
 	border: 0;
 }
 
-p {
-  font-family: 'Fanwood Text', serif;
-}
 
 input[type=button] {
   padding: 4px;
