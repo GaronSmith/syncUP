@@ -69,7 +69,7 @@ function ProfileBox({label, content, userFile}) {
   };
   return (
     <>
-      <input type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
+      <input class='profile__field' type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
       { id === 'me' &&
       <>
       <span> </span>
