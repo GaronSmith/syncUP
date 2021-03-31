@@ -47,7 +47,6 @@
 }
 
 .profile_group-card:hover {
-  /* border: 2px black solid; */
   cursor: pointer;
   transform: scale(1.05);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
