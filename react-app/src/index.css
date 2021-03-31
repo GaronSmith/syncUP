@@ -33,12 +33,10 @@ input[type=button]:hover {
 
 input[type=text] {
   padding: 4px;
-  width: 50%;
 }
 
 input[type=password] {
   padding: 4px;
-  width: 50%;
 }
 
 
