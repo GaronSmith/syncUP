@@ -1,15 +1,16 @@
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkedAlt, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkedAlt, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { getEvent, joinEvent, deleteEvent } from '../../store/event';
-import { getOne } from '../../store/groups'
+import { getOne } from '../../store/groups';
 import AttendeeCard from './AttendeeCard';
-import GroupCard from '../UserProfile/GroupCard'
+import GroupCard from '../UserProfile/GroupCard';
+import { Modal } from '../../context/modal';
+import EditEventForm from '../EventForm/EditEventForm';
 import './EventPage.css';
-import { useState } from 'react';
 
 function EventPage() {
     const { eventId } = useParams();
@@ -21,6 +22,7 @@ function EventPage() {
     const [ joinGroup, setJoinGroup ] = useState(false);
     const [ userInEvent, setUserInEvent ] = useState(false);
     const [ userInGroup, setUserInGroup ] = useState(false);
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         dispatch(getEvent(eventId));
@@ -72,6 +74,10 @@ function EventPage() {
         }, 1000);
     };
 
+    const onEventEdit = () => {
+        setShowModal(true);
+    };
+
     return (
         <>
             {storeEvent && storeGroup && (
@@ -83,12 +89,20 @@ function EventPage() {
                         {user && storeEvent.owner.id !== user.id && userInEvent &&
                             <button className='event__button' onClick={leaveEvent}>Leave</button>
                         }
-                        {!userInEvent && (!joinGroup ?
+                        {!userInEvent && storeGroup.owner && !(storeEvent.owner.id === user.id || storeGroup.owner.id === user.id) && (!joinGroup ?
                             <button className='event__button' onClick={attendEvent}>Attend</button> :
                             <button className='event__button' style={{ color: 'red', fontWeight: 'bold'}}>Please join group to attend</button>)
                         }
                         {user && storeGroup.owner && (storeEvent.owner.id === user.id || storeGroup.owner.id === user.id) &&
-                            <button className='event__button' onClick={onEventDelete}>Delete Event</button>
+                            <div className='event__button__container'>
+                                <button className='event__button' onClick={onEventEdit}>Edit Event</button>
+                                {showModal && (
+                                    <Modal onClose={() => setShowModal(false)}>
+                                        <EditEventForm setShowModal={setShowModal} storeEvent={storeEvent}/>
+                                    </Modal>
+                                )}
+                                <button className='event__button' onClick={onEventDelete}>Delete Event</button>
+                            </div>
                         }
                         {storeEvent.image_url && (
                             <div className='event__image'>
