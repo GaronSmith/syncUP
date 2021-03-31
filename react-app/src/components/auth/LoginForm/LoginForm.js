@@ -36,6 +36,12 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     return <Redirect to="/" />;
   }
 
+  const demoLogin = () => {
+    setEmail('demo@aa.io');
+    setPassword('password');
+    // onLogin();
+  }
+
   return (
     <div className= 'login__container'>
       <h1 className='form__title'>Login</h1>
@@ -69,6 +75,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           </div>
           <div id='form__button-container'>
             <button className='form__field form__button' type="submit">Login</button>
+            <button className='form__field form__button' onClick={demoLogin}>Demo User</button>
           </div>
         </div>
       </form>
