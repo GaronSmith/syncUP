@@ -3,3 +3,9 @@
     border-radius: 20px;
     color: rgb(243,247,253);
 }
+
+.tag-button:hover{
+    background-color: rgba(119,166,247, 1);
+    border-radius: 20px;
+    color: rgb(243,247,253);
+}

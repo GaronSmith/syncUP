@@ -30,12 +30,10 @@ function ProfileBox({label, content, userFile}) {
     } else {
       setFormDisabled(true);
       setButtonText('Edit');
-      console.log('Before the return')
       if(userFile) {
         imgButton.disabled = true;
       }
       if(value === initialValue) return;
-      console.log('Submitting')
       dispatch(editUser(user.id, label, value))
     }
   }
@@ -71,7 +69,7 @@ function ProfileBox({label, content, userFile}) {
   };
   return (
     <>
-      <input type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
+      <input class='profile__field' type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
       { id === 'me' &&
       <>
       <span> </span>

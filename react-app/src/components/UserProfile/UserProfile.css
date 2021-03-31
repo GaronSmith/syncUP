@@ -40,6 +40,7 @@
   flex-direction: column;
   align-items: center;
   transition: all .2s ease-in-out;
+  overflow: hidden;
 }
 
 .profile_group-card--bottom {
@@ -139,4 +140,14 @@
 
 .profile h2 {
   margin-left: 10px;
+}
+
+.profile__field {
+  padding: 4px;
+  width: 200px;
+  -webkit-transition: width .35s ease-in-out;
+  transition: width .35s ease-in-out;
+}
+.profile__field:focus {
+  width: 300px;
 }
