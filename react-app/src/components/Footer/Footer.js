@@ -2,16 +2,46 @@ import React from 'react'
 import {Technology, GitHubLogo} from './Technology'
 
 import './Footer.css'
+import Connect from './Connect'
+
+const garon = {
+  name: 'Garon Smith',
+  gitHub: 'https://github.com/GaronSmith',
+  linkedIn: 'https://www.linkedin.com/in/william-garon-smith-3728234b/',
+  angelList: 'https://angel.co/u/garon-smith'
+}
+const cb = {
+  name: 'Christion Barnes',
+  gitHub: 'https://github.com/cabarnes2020',
+  linkedIn: 'https://www.linkedin.com/in/christionbarnes/',
+  angelList: '#'
+}
+const gui = {
+  name: 'Guilherme Pace',
+  gitHub: 'https://github.com/guipace',
+  linkedIn: 'https://www.linkedin.com/in/guilhermepace/',
+  angelList: 'https://angel.co/u/guilherme-pace'
+}
+
+const clint = {
+  name: 'Clinton Hill',
+  gitHub: 'https://github.com/clintonhill',
+  linkedIn: 'https://www.linkedin.com/in/clinton-hill-4438a0205/',
+  angelList: 'https://angel.co/u/clinton-hill'
+}
 
 function Footer() {
   return (
     <footer>
       <div className='footer__container'>
         <div className='footer__contributors'>
-          <GitHubLogo name='C.Barnes' url='https://github.com/cabarnes2020'/>
-          <GitHubLogo name='C.Hill' url='https://github.com/clintonhill'/>
-          <GitHubLogo name='G.Smith' url='https://github.com/GaronSmith'/>
-          <GitHubLogo name='G.Pace' url='https://github.com/guipace'/>
+          <Connect person={cb}/>
+          <div className='connect__spacer' />
+          <Connect person={clint}/>
+          <div className='connect__spacer' />
+          <Connect person={garon}/>
+          <div className='connect__spacer' />
+          <Connect person={gui}/>
         </div>
         <div className='footer__technologies'>
           <Technology img='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png' url='https://reactjs.org/'/>
