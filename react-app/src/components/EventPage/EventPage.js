@@ -9,6 +9,7 @@ import { getOne } from '../../store/groups'
 import AttendeeCard from './AttendeeCard';
 import GroupCard from '../UserProfile/GroupCard'
 import './EventPage.css';
+import { useState } from 'react';
 
 function EventPage() {
     const { eventId } = useParams();
@@ -17,6 +18,9 @@ function EventPage() {
     const storeEvent = useSelector(state => state.event);
     const storeGroup = useSelector(state => state.group.group);
     const user = useSelector(state => state.session.user);
+    const [ joinGroup, setJoinGroup ] = useState(false);
+    const [ userInEvent, setUserInEvent ] = useState(false);
+    const [ userInGroup, setUserInGroup ] = useState(false);
 
     useEffect(() => {
         dispatch(getEvent(eventId));
@@ -28,34 +32,37 @@ function EventPage() {
         }
     }, [storeEvent, dispatch]);
 
-    let userInEvent = false;
-    if (storeEvent && user) {
-        for (let i = 0; i < storeEvent.attendees.length; i++) {
-            if (storeEvent.attendees[i].email === user.email) {
-                userInEvent = true;
+    useEffect(() => {
+        if (storeEvent && user) {
+            for (let i = 0; i < storeEvent.attendees.length; i++) {
+                if (storeEvent.attendees[i].email === user.email) {
+                    setUserInEvent(true);
+                }
             }
         }
-    }
+    }, [storeEvent, user]);
 
-    let userInGroup = false;
-    if (storeEvent && user && user.groups) {
-        for (let i = 0; i < user.groups.length; i++) {
-            if (user.groups[i] === storeEvent.group_id) {
-                userInGroup = true;
+    useEffect(() => {
+        if (storeEvent && user && user.groups) {
+            for (let i = 0; i < user.groups.length; i++) {
+                if (user.groups[i] === storeEvent.group_id) {
+                    setUserInGroup(true);
+                }
             }
         }
-    }
+    }, [storeEvent, user]);
 
     const attendEvent = async (e) => {
         if (userInGroup) {
             dispatch(joinEvent(user.id, storeEvent.id))
         } else {
-            alert('Please join this group before registering for the event')
+            setJoinGroup(true);
         }
     };
 
     const leaveEvent = async (e) => {
         dispatch(joinEvent(user.id, storeEvent.id));
+        setUserInEvent(false);
     };
 
     const onEventDelete = () => {
@@ -76,8 +83,9 @@ function EventPage() {
                         {user && storeEvent.owner.id !== user.id && userInEvent &&
                             <button className='event__button' onClick={leaveEvent}>Leave</button>
                         }
-                        {!userInEvent &&
-                            <button className='event__button' onClick={attendEvent}>Attend</button>
+                        {!userInEvent && (!joinGroup ?
+                            <button className='event__button' onClick={attendEvent}>Attend</button> :
+                            <button className='event__button' style={{ color: 'red', fontWeight: 'bold'}}>Please join group to attend</button>)
                         }
                         {user && storeGroup.owner && (storeEvent.owner.id === user.id || storeGroup.owner.id === user.id) &&
                             <button className='event__button' onClick={onEventDelete}>Delete Event</button>

@@ -5,7 +5,7 @@ import "./EventsCard.css"
 const EventsCard = ({event}) => {
     const history = useHistory();
     return (
-        <div className="events-card__container" onClick={() =>history.push(`/groups/${event.group_id}`)}>
+        <div className="events-card__container" onClick={() =>history.push(`/event/${event.id}`)}>
             <div className="events-card__left">
                 <img className='events__image' src={event.image_url} alt='tobad'/>
             </div>

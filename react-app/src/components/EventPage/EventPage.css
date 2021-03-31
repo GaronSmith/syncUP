@@ -17,7 +17,7 @@
 .event__button {
     grid-area: attend;
     margin: auto;
-    width: 10rem;
+    min-width: 10rem;
     height: 2rem;
 }
 
