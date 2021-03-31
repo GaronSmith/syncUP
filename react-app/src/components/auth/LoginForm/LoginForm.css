@@ -1,6 +1,6 @@
 .login__container{
     background-color: rgba(119, 166, 247, .9);
-    height: 17rem;
+    height: auto;
     width: 20rem;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,13 @@
     margin-left:1.45rem;
 }
 
-.form__button{
-    margin-left: 4.6rem;
+#form__button-container {
+    display: flex;
+    justify-content: center;
+}
+
+#form__button-container .form__button{
+    margin: 0;
     margin-top: 3rem;
+    margin-bottom: 1rem;
 }

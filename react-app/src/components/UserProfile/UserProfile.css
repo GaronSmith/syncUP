@@ -142,12 +142,12 @@
   margin-left: 10px;
 }
 
-/* input[type=text] {
+.profile__field {
   padding: 4px;
   width: 200px;
   -webkit-transition: width .35s ease-in-out;
   transition: width .35s ease-in-out;
 }
-input[type=text]:focus {
+.profile__field:focus {
   width: 300px;
-} */
+}
