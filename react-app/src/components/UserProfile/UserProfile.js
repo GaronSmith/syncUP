@@ -11,7 +11,6 @@ import './UserProfile.css';
 const demoUsers = [{email: "bob@hopscotch.io",},{email: "demodave@hopscotch.io",}];
 
 function UserProfile() {
-
   const { id } = useParams();
   const dispatch = useDispatch();
   let sessionUser = useSelector(state => state.session.user)
