@@ -10,14 +10,18 @@
 .form__title{
     color: #F3F7FE;
 }
-.form_field-container{
+.form__field-container{
    display: flex;
    flex-direction: column;
-   justify-content: space-between; 
+   justify-content: space-between;
+   padding: 0 10px;
 }
 
 .form__field{
     margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .form__field-label{

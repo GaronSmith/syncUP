@@ -21,16 +21,6 @@ p {
   font-family: 'Fanwood Text', serif;
 }
 
-input[type=text] {
-  padding: 4px;
-  width: 200px;
-  -webkit-transition: width .35s ease-in-out;
-  transition: width .35s ease-in-out;
-}
-input[type=text]:focus {
-  width: 300px;
-}
-
 input[type=button] {
   padding: 4px;
   background-color: #F3F7FE;
@@ -39,6 +29,16 @@ input[type=button] {
 
 input[type=button]:hover {
   cursor: pointer;
+}
+
+input[type=text] {
+  padding: 4px;
+  width: 50%;
+}
+
+input[type=password] {
+  padding: 4px;
+  width: 50%;
 }
 
 
