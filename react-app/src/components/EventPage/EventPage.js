@@ -5,6 +5,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkedAlt, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons'
 import { getEvent, joinEvent, deleteEvent } from '../../store/event';
+import { getOne } from '../../store/groups'
 import AttendeeCard from './AttendeeCard';
 import GroupCard from '../UserProfile/GroupCard'
 import './EventPage.css';
@@ -14,11 +15,18 @@ function EventPage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const storeEvent = useSelector(state => state.event);
+    const storeGroup = useSelector(state => state.group.group);
     const user = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(getEvent(eventId));
     }, [eventId, dispatch]);
+
+    useEffect(() => {
+        if (storeEvent) {
+            dispatch(getOne(storeEvent.group_id));
+        }
+    }, [storeEvent, dispatch]);
 
     let userInEvent = false;
     if (storeEvent && user) {
@@ -59,7 +67,7 @@ function EventPage() {
 
     return (
         <>
-            {storeEvent && (
+            {storeEvent && storeGroup && (
                 <>
                     <div className='eventPage__container'>
                         <div className='event__name'>
@@ -71,7 +79,7 @@ function EventPage() {
                         {!userInEvent &&
                             <button className='event__button' onClick={attendEvent}>Attend</button>
                         }
-                        {user && storeEvent.owner.id === user.id &&
+                        {user && storeGroup.owner && (storeEvent.owner.id === user.id || storeGroup.owner.id === user.id) &&
                             <button className='event__button' onClick={onEventDelete}>Delete Event</button>
                         }
                         {storeEvent.image_url && (
