@@ -28,8 +28,6 @@ const GroupPage = ()=> {
             }
             console.log('USE_EFFECT', inGroup)
         }
-        
-
     }, [dispatch, sessionUser, groupId])
 
     const joinGroup = ((e) => {
@@ -51,7 +49,7 @@ const GroupPage = ()=> {
     })
 
     return (
-        sessionUser && 
+        // sessionUser &&
         <>
             <div className='group__container'>
                 <div className='group__title'>
