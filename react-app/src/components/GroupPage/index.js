@@ -37,6 +37,14 @@ const GroupPage = ()=> {
         dispatch(addToGroup(groupId))
     })
 
+    const joinPrivateGroup = ((e) => {
+        e.preventDefault()
+        const button = document.getElementById("private-join")
+        button.innerHTML = "Request Sent"
+        button.setAttribute("disabled", true)
+        dispatch(addToGroup(groupId))
+    })
+
     const leaveGroup = ((e) => {
         e.preventDefault()
         dispatch(removeFromGroup(groupId))
@@ -55,20 +63,19 @@ const GroupPage = ()=> {
                         <h3>Created by {group.owner_name}</h3>
                         <h3>Located in {group.location}</h3>
                         {
-                            // group.is_private ?
-                                // inGroup ?
-                                //     <div className='leave__div'>
-                                //         <form>
-                                //             <button onClick={leaveGroup}> Leave {group.name} </button>
-                                //         </form>
-                                //     </div> :
-                                //     <div className='request__div'>
-                                //         <form>
-                                //             <button disabled> Request sent to group owner!</button>
-                                //         </form>
-                                //     </div>
-                                // :
-
+                            group.is_private ?
+                                inGroup ?
+                                    <div className='leave__div'>
+                                        <form>
+                                            <button onClick={leaveGroup}> Leave {group.name} </button>
+                                        </form>
+                                    </div> :
+                                    <div className='join__div'>
+                                        <form>
+                                            <button id='private-join' onClick={joinPrivateGroup}> Join {group.name} </button>
+                                        </form>
+                                    </div>
+                                :
                                inGroup ? 
                                     <div className='leave__div'>
                                         <form>
