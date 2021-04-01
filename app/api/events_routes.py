@@ -68,7 +68,6 @@ def attend_event(id):
     (userId, eventId) = (data['userId'], data['eventId'])
     user = User.query.get(userId)
     event = Event.query.get(eventId)
-    print(event.users)
     if user not in event.users:
         event.users.append(user)
     else:

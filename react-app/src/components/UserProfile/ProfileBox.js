@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom'
 import { editUser, uploadUserImage } from '../../store/user'
 
 function ProfileBox({label, content, userFile}) {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  let user = useSelector(state => state.user)
   let [buttonText, setButtonText] = useState('Edit');
   let [value, setValue] = useState(content);
   let [formDisabled, setFormDisabled] = useState(true);
   let [imageFile, setImageFile] = useState(null)
-  let user = useSelector(state => state.user)
-  const { id } = useParams();
-  const dispatch = useDispatch();
+
   const initialValue = content;
 
   useEffect(() => {
@@ -19,15 +20,15 @@ function ProfileBox({label, content, userFile}) {
 
   const buttonClick = () => {
     const imgButton = document.getElementById('imageButton');
-    //The editor is not active.
+    //The editor is not active
     if(formDisabled) {
       setFormDisabled(false);
       if(userFile) {
         imgButton.disabled = false;
       }
       setButtonText('Confirm');
-    //The editor is active. Clicking this will dispatch a thunk to actually change the database.
     } else {
+      //The editor is active - Dispatch a thunk to mutate the database
       setFormDisabled(true);
       setButtonText('Edit');
       if(userFile) {
@@ -42,7 +43,7 @@ function ProfileBox({label, content, userFile}) {
     setImageFile(e.target.files[0]);
   }
 
-  //We are checking if the image file has changed. If it has, it's time to send an upload.
+  //Check if image file changed - If so, upload to S3
   useEffect(() => {
     async function fetchUrl() {
       const imgUrl = await dispatch(uploadUserImage(imageFile))
@@ -62,11 +63,11 @@ function ProfileBox({label, content, userFile}) {
         onChange={userFileSubmit}
         name='imageFile'
         id='imageButton'
-        // disabled
       />
     </>
     );
   };
+
   return (
     <>
       <input class='profile__field' type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
