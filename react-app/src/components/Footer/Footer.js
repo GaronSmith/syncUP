@@ -1,5 +1,5 @@
 import React from 'react'
-import {Technology, GitHubLogo} from './Technology'
+import { Technology } from './Technology'
 
 import './Footer.css'
 import Connect from './Connect'
