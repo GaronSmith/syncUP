@@ -1,57 +1,86 @@
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkedAlt, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons'
-import { getEvent, joinEvent } from '../../store/event';
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkedAlt, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { getEvent, joinEvent, deleteEvent } from '../../store/event';
+import { getOne } from '../../store/groups';
 import AttendeeCard from './AttendeeCard';
-import GroupCard from '../UserProfile/GroupCard'
+import GroupCard from '../UserProfile/GroupCard';
+import { Modal } from '../../context/modal';
+import EditEventForm from '../EventForm/EditEventForm';
 import './EventPage.css';
 
 function EventPage() {
     const { eventId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
     const storeEvent = useSelector(state => state.event);
-    const user = useSelector(state => state.session.user)
+    const storeGroup = useSelector(state => state.group.group);
+    const user = useSelector(state => state.session.user);
+    const [ joinGroup, setJoinGroup ] = useState(false);
+    const [ userInEvent, setUserInEvent ] = useState(false);
+    const [ userInGroup, setUserInGroup ] = useState(false);
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         dispatch(getEvent(eventId));
     }, [eventId, dispatch]);
 
-    let userInEvent = false;
-    if (storeEvent && user) {
-        for (let i = 0; i < storeEvent.attendees.length; i++) {
-            if (storeEvent.attendees[i].email === user.email) {
-                userInEvent = true;
-            }
+    useEffect(() => {
+        if (storeEvent) {
+            dispatch(getOne(storeEvent.group_id));
         }
-    }
+    }, [storeEvent, dispatch]);
 
-    let userInGroup = false;
-    if (storeEvent && user && user.groups) {
-        for (let i = 0; i < user.groups.length; i++) {
-            if (user.groups[i] === storeEvent.group_id) {
-                userInGroup = true;
+    useEffect(() => {
+        if (storeEvent && user) {
+            for (let i = 0; i < storeEvent.attendees.length; i++) {
+                if (storeEvent.attendees[i].email === user.email) {
+                    setUserInEvent(true);
+                }
             }
         }
-    }
+    }, [storeEvent, user]);
+
+    useEffect(() => {
+        if (storeEvent && user && user.groups) {
+            for (let i = 0; i < user.groups.length; i++) {
+                if (user.groups[i] === storeEvent.group_id) {
+                    setUserInGroup(true);
+                }
+            }
+        }
+    }, [storeEvent, user]);
 
     const attendEvent = async (e) => {
         if (userInGroup) {
             dispatch(joinEvent(user.id, storeEvent.id))
         } else {
-            alert('Please join this group before registering for the event')
+            setJoinGroup(true);
         }
     };
 
     const leaveEvent = async (e) => {
-        dispatch(joinEvent(user.id, storeEvent.id))
+        dispatch(joinEvent(user.id, storeEvent.id));
+        setUserInEvent(false);
+    };
+
+    const onEventDelete = () => {
+        dispatch(deleteEvent(storeEvent.id));
+        setTimeout(() => {
+            history.push('/');
+        }, 1000);
+    };
+
+    const onEventEdit = () => {
+        setShowModal(true);
     };
 
     return (
         <>
-            {storeEvent && (
+            {storeEvent && storeGroup && (
                 <>
                     <div className='eventPage__container'>
                         <div className='event__name'>
@@ -60,11 +89,20 @@ function EventPage() {
                         {user && storeEvent.owner.id !== user.id && userInEvent &&
                             <button className='event__button' onClick={leaveEvent}>Leave</button>
                         }
-                        {!userInEvent &&
-                            <button className='event__button' onClick={attendEvent}>Attend</button>
+                        {!userInEvent && storeGroup.owner && !(storeEvent.owner.id === user.id || storeGroup.owner.id === user.id) && (!joinGroup ?
+                            <button className='event__button' onClick={attendEvent}>Attend</button> :
+                            <button className='event__button' style={{ color: 'red', fontWeight: 'bold'}}>Please join group to attend</button>)
                         }
-                        {user && storeEvent.owner.id === user.id &&
-                            <button className='event__button' onClick={console.log("CLICK DELETE EVENT")}>Delete Event</button>
+                        {user && storeGroup.owner && (storeEvent.owner.id === user.id || storeGroup.owner.id === user.id) &&
+                            <div className='event__button__container'>
+                                <button className='event__button' onClick={onEventEdit}>Edit Event</button>
+                                {showModal && (
+                                    <Modal onClose={() => setShowModal(false)}>
+                                        <EditEventForm setShowModal={setShowModal} storeEvent={storeEvent}/>
+                                    </Modal>
+                                )}
+                                <button className='event__button' onClick={onEventDelete}>Delete Event</button>
+                            </div>
                         }
                         {storeEvent.image_url && (
                             <div className='event__image'>

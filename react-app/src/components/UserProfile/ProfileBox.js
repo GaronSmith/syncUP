@@ -58,11 +58,11 @@ function ProfileBox({label, content, userFile}) {
     <>
       <span> </span>
       <input
-      type='file'
-      onChange={userFileSubmit}
-      name='imageFile'
-      id='imageButton'
-      disabled
+        type='file'
+        onChange={userFileSubmit}
+        name='imageFile'
+        id='imageButton'
+        // disabled
       />
     </>
     );

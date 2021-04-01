@@ -31,6 +31,34 @@ input[type=password] {
   padding: 4px;
 }
 
+input[type=file] {
+  color: transparent;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type=file]::before {
+  content: 'Choose file';
+  color: black;
+  display: inline-block;
+  padding: 4px;
+  background-color: #F3F7FE;
+  border: 2px #77A6F7 solid;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+input[type=file]:hover::before {
+  border-color: black;
+}
+input[type=file]:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
 
 button {
   padding: 4px;

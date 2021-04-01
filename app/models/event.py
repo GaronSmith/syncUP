@@ -21,7 +21,7 @@ class Event(db.Model):
     capacity = db.Column(db.Integer, nullable=False)
 
     owner = db.relationship('User')
-    group = db.relationship('Group')
+    group = db.relationship('Group', back_populates='events')
     tags = db.relationship(
       'Tag', secondary=event_tags, back_populates='events')
     users = db.relationship(
