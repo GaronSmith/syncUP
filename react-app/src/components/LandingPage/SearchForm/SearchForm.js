@@ -73,7 +73,7 @@ const SearchForm = () => {
                         />
                     </div>
                     <div className='search__input-container'>
-                        <button className='form__field form__button' onClick={onClick} type="submit">Search</button>
+                        <button id='button' className='form__field form__button search__input' onClick={onClick} type="submit">Search</button>
                     </div>
                 </form>
             </div>
