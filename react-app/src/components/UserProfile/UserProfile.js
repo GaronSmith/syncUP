@@ -11,7 +11,6 @@ import './UserProfile.css';
 const demoUsers = [{email: "bob@hopscotch.io",},{email: "demodave@hopscotch.io",}];
 
 function UserProfile() {
-
   const { id } = useParams();
   const dispatch = useDispatch();
   let sessionUser = useSelector(state => state.session.user)
@@ -20,12 +19,13 @@ function UserProfile() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    if(!id || !sessionUser) return;
     if(id === 'me') {
       dispatch(getUser(sessionUser.id));
     }
     else
       dispatch(getUser(id));
-  },[dispatch, sessionUser.id, id, user.id])
+  },[dispatch, sessionUser, id, user.id])
 
   const imgURL = user?.image_url ? user.image_url : '/img/userDefault.png';
 
@@ -40,7 +40,7 @@ function UserProfile() {
           <p>Location <ProfileBox label='location' content={user.location}/></p>
           <p>Profile Picture <ProfileBox label='image_url' content={user.image_url} userFile={true}/></p>
           {/* TODO: Implement Change Password Button */}
-          {id === 'me' && <p><input type='button' value='Change Password' onClick={()=> setShowModal(true)}/></p> }
+          {/* {id === 'me' && <p><input type='button' value='Change Password' onClick={()=> setShowModal(true)}/></p> } */}
         </div>
         <div className='profile_user--right'>
           <div className='profile_picture' style={{ backgroundImage: `url(${imgURL})`}}/>

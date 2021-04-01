@@ -36,6 +36,16 @@ export const joinEvent = (userId, eventId) => async (dispatch) => {
   }
 }
 
+export const deleteEvent = (eventId) => async (dispatch) => {
+  const res = await fetch(`/api/events/${eventId}`, {
+    method:'DELETE',
+  })
+
+  if (res.ok) {
+    dispatch(removeEvent());
+  }
+}
+
 const initialState = null;
 
 const eventReducer = ( state = initialState, action ) => {

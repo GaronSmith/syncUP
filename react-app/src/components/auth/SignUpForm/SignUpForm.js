@@ -114,7 +114,7 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
         </div>
         <div className='form__field'>
           <label className='form__field-label' htmlFor="imageFile">Picture</label>
-          <input className='form__field-input'
+          <input className='form__field-input custom-file-input'
             type="file"
             name="imageFile"
             onChange={updateImageFile}

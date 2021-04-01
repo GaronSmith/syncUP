@@ -58,18 +58,18 @@ function ProfileBox({label, content, userFile}) {
     <>
       <span> </span>
       <input
-      type='file'
-      onChange={userFileSubmit}
-      name='imageFile'
-      id='imageButton'
-      disabled
+        type='file'
+        onChange={userFileSubmit}
+        name='imageFile'
+        id='imageButton'
+        // disabled
       />
     </>
     );
   };
   return (
     <>
-      <input type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
+      <input class='profile__field' type='text' value={value} disabled={formDisabled} onChange={e => setValue(e.target.value)}/>
       { id === 'me' &&
       <>
       <span> </span>
