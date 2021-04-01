@@ -37,7 +37,6 @@ const CreateGroupForm = ({setShowModal}) => {
         }); 
 
         if (!response.errors) {
-            dispatch(setUser(response.data));
             setShowModal(false)
             history.push(`/groups/${response.data.id}`);
         } else {
