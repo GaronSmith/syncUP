@@ -14,7 +14,6 @@ def groups():
     return {"groups": [groups.to_dict() for group in groups]}
 
 @group_routes.route('/<int:id>')
-@login_required
 def group(id):
     group = Group.query.get(id)
     return group.to_dict()
