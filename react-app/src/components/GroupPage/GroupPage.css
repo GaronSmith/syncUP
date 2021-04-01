@@ -12,7 +12,7 @@
 .group__photo{
     display: flex;
     justify-content: center;
-    width:100%;
+    width:80%;
     max-height: 30rem;
     overflow: hidden;
     margin-top: 2rem;
@@ -20,6 +20,7 @@
 }
 
 .group__photo img{
+    object-fit: cover;
     border-radius: 0.5rem;
     width:90%;
     margin-right: 2rem;
@@ -31,7 +32,7 @@
     border-radius: 15px;
     height: fit-content;
     padding: 10px;
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 
 .group__description{
@@ -45,7 +46,6 @@
     border: 2px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    margin-left: 1rem;
     padding-left: 1rem;
     width: 75%;
 }
