@@ -1,5 +1,5 @@
 import React from 'react'
-import {Technology, GitHubLogo} from './Technology'
+import { Technology } from './Technology'
 
 import './Footer.css'
 import Connect from './Connect'
@@ -35,19 +35,31 @@ function Footer() {
     <footer>
       <div className='footer__container'>
         <div className='footer__contributors'>
-          <Connect person={cb}/>
-          <div className='connect__spacer' />
-          <Connect person={clint}/>
-          <div className='connect__spacer' />
-          <Connect person={garon}/>
-          <div className='connect__spacer' />
-          <Connect person={gui}/>
+          <h4>Developers</h4>
+          <div className='footer__inner-container'>
+            <Connect person={cb}/>
+            <div className='connect__spacer' />
+            <Connect person={clint}/>
+            <div className='connect__spacer' />
+            <Connect person={garon}/>
+            <div className='connect__spacer' />
+            <Connect person={gui}/>
+          </div>
         </div>
         <div className='footer__technologies'>
-          <Technology img='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/220px-React-icon.svg.png' url='https://reactjs.org/'/>
-          <Technology img='https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png' url='https://redux.js.org/'/>
-          <Technology img='https://invenio-software.org/static/img/logo-flask.svg' url='https://flask.palletsprojects.com/en/1.1.x/'/>
-          <Technology img='https://flask-sqlalchemy.palletsprojects.com/en/2.x/_static/flask-sqlalchemy-logo.png' url='https://www.sqlalchemy.org/'/>
+          <h4>Technologies Used</h4>
+          <div className='footer__inner-container'>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-react.png' url='https://reactjs.org/'/>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-redux.png' url='https://redux.js.org/'/>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-nodejs.png' url='https://nodejs.org/'/>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-javascript.png' url='https://developer.mozilla.org/en-US/docs/Web/JavaScript'/>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-html5.png' url='https://developer.mozilla.org/en-US/docs/Web/HTML'/>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-css3.png' url='https://developer.mozilla.org/en-US/docs/Web/CSS'/>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-python.png' url='https://www.python.org/'/>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-postgresql.png' url='https://www.postgresql.org/'/>
+            <Technology img='https://soarview.s3.amazonaws.com/logo-flask.png' url='https://palletsprojects.com/p/flask/'/>
+            <Technology img='https://flask-sqlalchemy.palletsprojects.com/en/2.x/_static/flask-sqlalchemy-logo.png' url='https://www.sqlalchemy.org/'/>
+          </div>
         </div>
       </div>
     </footer>

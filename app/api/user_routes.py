@@ -28,14 +28,13 @@ def add_new_group():
     data = json.loads(request.data)
     id = data['id']
     group = Group.query.get(id)
-    print("*********", id)
 
     if group.is_private is False:
         user.groups.append(group)
         db.session.commit()
 
         return user.to_dict()
-    
+
     else:
         waiting_user = GroupQueue(user_id=user.id, group_id=group.id)
 
@@ -52,7 +51,6 @@ def remove_group():
     data = json.loads(request.data)
     id = data['id']
     group = Group.query.get(id)
-    print("*********", id)
 
     user.groups.remove(group)
     db.session.commit()
