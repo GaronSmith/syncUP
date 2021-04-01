@@ -107,3 +107,38 @@ def new_event():
 
         return event.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@events_routes.route('/<int:id>', methods=['PATCH'])
+def edit_event(id):
+    form = EventForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    url = ''
+    if request.files:
+        url = upload_file_to_s3(request.files['imageFile'])
+
+    event = Event.query.get(id)
+
+    # if form.validate_on_submit():
+
+    event.name = form.data['name']
+    event.group_id = form.data['group_id']
+    event.details = form.data['details']
+    event.location = form.data['location']
+    event.date = form.data['date']
+    event.capacity = form.data['capacity']
+    if url:
+        event.image_url = url
+
+    db.session.commit()
+    return event.to_dict()
+    # return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@events_routes.route('/<int:id>', methods=['DELETE'])
+def delete_event(id):
+    event = Event.query.get(id)
+    db.session.delete(event)
+    db.session.commit()
+    return event.to_dict()
