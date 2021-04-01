@@ -1,20 +1,11 @@
 import axios from 'axios';
-// Action Constants
 
-// export const SET_OPTION = 'users/SET_OPTION'
+// Action Constants
 export const ADD_GROUP = '/users/ADD_GROUP'
 export const REMOVE_GROUP = '/users/REMOVE_GROUP'
 const SET_USER = '/users/SET_USER'
 
 //Action Creators
-
-// const setUserOption = (user) => {
-//   return {
-//     type: SET_OPTION,
-//     payload: user
-//   }
-// }
-
 const setUser = (user) => {
   return {
     type: SET_USER,
@@ -23,7 +14,6 @@ const setUser = (user) => {
 }
 
 //Thunk Creators
-
 export const editUser = (userId, column, val) => async (dispatch) => {
   const opts = {
     method: 'put',
@@ -62,7 +52,6 @@ export const uploadUserImage = (imageFile) => async () => {
 
 
 //Reducer
-
 export default function userReducer(state = {}, action){
   let newState = {...state};
   switch(action.type) {

@@ -1,6 +1,6 @@
 .footer__container {
   background-color: #77A6F7 ;
-  height: 100px;
+  padding: 0.5rem 0;
   margin-top: 25px;
   display: flex;
   align-items: center;
@@ -8,12 +8,23 @@
   overflow: hidden;
 }
 
+.footer__container h4 {
+  margin: 0.2rem;
+}
+
 .footer__technologies, .footer__contributors {
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0 25px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.footer__inner-container {
+  display: flex;
+  align-items: center;
 }
 
 .footer__tech-container {
@@ -21,16 +32,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: #00887a; */
-  padding: 5px;
   margin: 0px 5px;
-  width: 50px;
   height: 50px;
   border-radius: 5px;
 }
 
 .footer__tech-image {
-  width: 50px;
+  width: 2rem;
   height: 100%;
   background-position: center;
   background-size: contain;
