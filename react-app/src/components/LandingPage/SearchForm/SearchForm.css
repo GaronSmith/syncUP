@@ -20,7 +20,16 @@
     align-self: center;
 }
 
+.search__input-container{
+    align-self: center;
+}
+
 .search__label{
     margin-left: 1rem;
     color: #F3F7FE;
+}
+
+.form__button{
+    margin-bottom: 2.6rem;
+    margin-left: -.5 rem ;
 }

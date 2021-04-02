@@ -16,16 +16,16 @@ const SearchForm = () => {
 
     const user = useSelector(state => state.session.user)
 
-    useEffect(() => {
+    const onClick = async (e) => {
+        e.preventDefault()
         dispatch(removeEvents())
         dispatch(removeTags())
 
         const groups = user ? user.groups : null
+        console.log((searchValue, searchMyGroups, groups, startDate, endDate))
         dispatch(searchEvents(searchValue, searchMyGroups, groups, startDate, endDate))
         dispatch(searchTags(searchValue))
-
-
-    },[searchValue, searchMyGroups, user, startDate, endDate, dispatch])
+    }
     return (
         <div className= 'search__container'>
             <h1 className= 'form__title'>Search for your next syncUP event</h1>
@@ -71,6 +71,9 @@ const SearchForm = () => {
                             value={endDate}
                             onChange={(e) => setEndDate(e.target.value)}
                         />
+                    </div>
+                    <div className='search__input-container'>
+                        <button id='button' className='form__field form__button search__input' onClick={onClick} type="submit">Search</button>
                     </div>
                 </form>
             </div>
