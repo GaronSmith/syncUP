@@ -22,7 +22,6 @@ const SearchForm = () => {
         dispatch(removeTags())
 
         const groups = user ? user.groups : null
-        console.log((searchValue, searchMyGroups, groups, startDate, endDate))
         dispatch(searchEvents(searchValue, searchMyGroups, groups, startDate, endDate))
         dispatch(searchTags(searchValue))
     }
