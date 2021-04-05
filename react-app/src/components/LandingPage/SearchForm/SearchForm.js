@@ -16,6 +16,13 @@ const SearchForm = () => {
 
     const user = useSelector(state => state.session.user)
 
+    useEffect(() => {
+        const groups = user ? user.groups : null
+        dispatch(searchEvents("e", searchMyGroups, groups, startDate, endDate))
+        dispatch(searchTags(searchValue))
+
+    })
+
     const onClick = async (e) => {
         e.preventDefault()
         dispatch(removeEvents())
