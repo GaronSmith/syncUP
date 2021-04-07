@@ -1,5 +1,8 @@
 # syncUP
-[[Image]]
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/63423828/113934007-de0c6e80-97ba-11eb-95a2-8937a19358ec.gif" alt="SyncUP" />
+</p>
 
 [![Contributors](https://img.shields.io/github/contributors/GaronSmith/syncUP)](https://www.github.com/GaronSmith/syncUP/contributors)
 [![Open Issues](https://img.shields.io/github/issues/GaronSmith/syncUP)](https://www.github.com/GaronSmith/syncUP/issues)
@@ -106,7 +109,7 @@ const SearchForm = () => {
                             />
                         </div>
                     }
-                    
+
                     <div className='search__input-container'>
                         <label className="search__label">Start Date</label>
                         <input
