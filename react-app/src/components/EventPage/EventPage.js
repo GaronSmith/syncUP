@@ -89,7 +89,7 @@ function EventPage() {
                         {user && storeEvent.owner.id !== user.id && userInEvent &&
                             <button className='event__button' onClick={leaveEvent}>Leave</button>
                         }
-                        {!userInEvent && storeGroup.owner && !(storeEvent.owner.id === user.id || storeGroup.owner.id === user.id) && (!joinGroup ?
+                        {user && !userInEvent && storeGroup.owner && !(storeEvent.owner.id === user.id || storeGroup.owner.id === user.id) && (!joinGroup ?
                             <button className='event__button' onClick={attendEvent}>Attend</button> :
                             <button className='event__button' style={{ color: 'red', fontWeight: 'bold'}}>Please join group to attend</button>)
                         }
