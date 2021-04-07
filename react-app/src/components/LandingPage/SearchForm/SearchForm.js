@@ -21,7 +21,7 @@ const SearchForm = () => {
         dispatch(searchEvents("e", searchMyGroups, groups, startDate, endDate))
         dispatch(searchTags(searchValue))
 
-    })
+    }, [])
 
     const onClick = async (e) => {
         e.preventDefault()
